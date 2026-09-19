@@ -60,7 +60,7 @@
                 }
 
                 else{
-                    echo "<li id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
+                    echo "<li onclick='complete_goal(" . $row['id'] . ',"' . $username . '","' . $category . '"' . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
                 }
 
             }

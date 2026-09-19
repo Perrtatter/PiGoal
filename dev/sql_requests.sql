@@ -1,8 +1,8 @@
 ---------------------
--- Diamand  :  100
--- Or       :  75
--- Argent   :  50
--- Cuire    :  25
+-- (1) Diamand  :  100
+-- (2) Or       :  75
+-- (3) Argent   :  50
+-- (4) Cuire    :  25
 ---------------------
 
 -- avoir c et g nom
@@ -46,6 +46,15 @@ insert into c ( select id limit 1 )+1,+1,+1,+1
 update "user" set nbr_point=25 where username='Mathys' -- $username
 
 
+-- completer goal 
+---------------------
+update goal set is_complete=true where id=$goal_id;
+
+
+-- avoir p par g_id
+---------------------
+select type from goal where id=$goal_id;
+-- voir la table des point en haut
 
 
         /*
