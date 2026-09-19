@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(44, 44, 44);
+    flex-direction: column;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+#logo{
+    height: 150px;
+    width:150px;
+}
+
+input{
+    padding: 5px;
+    border: 5px solid rgb(0, 187, 255);
+    margin-top: 20px;
+    width: 200px;
+}
+
+input:focus{
+    outline: none;
+}
+
+button{
+    padding:10px;
+    border-radius: 5px;
+    border:none;
+    margin-top: 30px;
+    background-color: rgb(106, 106, 106);
+    color:white;
+}
+
+button:active{
+    background-color: rgb(209, 209, 209);
+    color:black;
+}

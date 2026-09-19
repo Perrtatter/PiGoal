@@ -1,0 +1,59 @@
+/* Reset and page styling */
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- TOAST SYSTEM STYLES --- */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 400px;
+    padding: 16px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* slideIn runs instantly. fadeOut starts at 2.5s and finishes at 3s */
+    animation: slideIn 0.3s ease-out, fadeOut 0.5s ease-in 2.5s forwards;
+}
+
+/* Toast variations */
+.toast.success { background-color: #2ecc71; }
+.toast.error { background-color: #e74c3c; }
+.toast.info { background-color: #3498db; }
+
+/* Close button style */
+.toast-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0 0 0 15px;
+}
+
+.toast-close:hover { opacity: 1; }
+
+/* Animations */
+@keyframes slideIn {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(20px); }
+}
