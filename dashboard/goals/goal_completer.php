@@ -10,14 +10,25 @@
         $goal_id = $_GET["goal_id"];
         $username = $_GET["username"];
         $category = $_GET["category"];
+        $goal_type = $_GET["goal_type"];
 
         // connect
         $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
         $dbconn = pg_connect($connection_string);
 
+        // complete goal in db
         $query = "update goal set is_complete=true where id=" . $goal_id;
+        $result = pg_query($dbconn, $query);
 
-        // 2. Execute the query
+        // add point 
+        $goal_point_dict = [
+            1=> 100,
+            2=> 75,
+            3=> 50,
+            4=> 25
+        ];
+
+        $query = 'update "user" set nbr_point=nbr_point+' . $goal_point_dict[$goal_type];
         $result = pg_query($dbconn, $query);
 
         // 6. Free the result memory
