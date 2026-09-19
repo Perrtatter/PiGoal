@@ -1,4 +1,4 @@
 # Goal-App-DB
-App lied to Postgres Database 
-
-hfurwhfuwr
+ 
+## Run server 
+Use Vscode `PHP Server`
