@@ -4,5 +4,5 @@ function go2category(category,username){
     username = encodeURI(username)
 
     // redirect
-    document.location.href = "http://localhost:3000/dashboard/goals/index.php?username=" + username + "&category=" + category
+    document.location.href = "goals/index.php?username=" + username + "&category=" + category
 }

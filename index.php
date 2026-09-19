@@ -49,7 +49,7 @@
                     echo "<script'>toast('Correct password.', 'success')</script>";
 
                     // redirect to dashboard
-                    echo "<script>document.location.href = 'http://localhost:3000/dashboard/index.php?p=zi3di(ufe31ck433Klls&user=$username'</script>";
+                    echo "<script>document.location.href = 'dashboard/index.php?p=zi3di(ufe31ck433Klls&user=$username'</script>";
                 }
 
                 else{

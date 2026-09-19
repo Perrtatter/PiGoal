@@ -25,7 +25,7 @@
     <?php
         // check pass
         if ($_GET["p"] != "zi3di(ufe31ck433Klls"){
-            echo "<script>alert('Please Login !');document.location.href = 'http://localhost:3000/'</script>";
+            echo "<script>alert('Please Login !');document.location.href = '/'</script>";
         }
 
         else{
