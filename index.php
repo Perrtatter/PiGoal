@@ -30,7 +30,6 @@
                 $username = $_POST['username'];
                 $password = $_POST['password'];
             
-            
             // connect
             $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
             $dbconn = pg_connect($connection_string);
