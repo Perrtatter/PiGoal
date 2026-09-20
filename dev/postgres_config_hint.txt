@@ -1,0 +1,9 @@
+postrgesql.conf : show config_file;
+------------------------------------
+listen_addresses = '*'
+
+
+pg_hba.conf     : show hba_file;
+------------------------------------
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+host    postgres        postgres        172.22.22.35/32         scram-sha-256
