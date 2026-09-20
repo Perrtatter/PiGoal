@@ -73,12 +73,13 @@
             // 5. Loop through and print each category name
             while ($row = pg_fetch_assoc($result)) { 
                 if ($row['is_complete'] == "t"){
-                    // echo "<li>" . htmlspecialchars($row['nom']) . "<br><button class='edit_cal_btn'>✏️</button><button class='del_cal_btn'>🗑️</button></li>";
-                    echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<br></li>";
+                    // echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
+                    echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "</li>";
                 }
 
                 else{
-                    echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<br></li>";
+                    // echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
+                    echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "</li>";
                 }
 
             }

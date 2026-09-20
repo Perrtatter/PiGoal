@@ -19,3 +19,7 @@ dbname = json_payload["dbname"]
 # connect 
 connect = psycopg2.connect(dbname=dbname,host=host,port=port,user=username,password=password)
 cursor = connect.cursor()
+
+# close
+cursor.close()
+connect.close()

@@ -53,3 +53,7 @@ async function addCategoryToDB(name) {
 
     console.log("Réponse PHP :", text);
 }
+
+function del_category(){
+    toast("Not aviable yet.","info")
+}
