@@ -87,7 +87,7 @@
         }
 
         // fetch coins nbr 
-        $query = 'select nbr_point from "user" where username = ' . "'Mathys'";
+        $query = 'select nbr_point from "user" where username = ' . "'" . $username . "';";
         $result = pg_query($dbconn, $query);
 
         $row = pg_fetch_assoc($result);
