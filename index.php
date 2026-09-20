@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="compenents/toast/toast.css">
     <script src="compenents/toast/toast.js"></script>
+    <script src="compenents/get_env/get_env.js"></script>
 
     <link rel="shortcut icon" href="assets/diamond.png" type="image/png">
 </head>
