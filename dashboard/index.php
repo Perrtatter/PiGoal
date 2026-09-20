@@ -23,6 +23,14 @@
     <div id="toast-container"></div>
 
     <?php
+        // import env
+        require_once __DIR__ . '/../compenents/get_env/get_env.php';
+        $db_host = get_env("../","host");
+        $db_port = get_env("../","port");
+        $db_password = get_env("../","password");
+        $db_username = get_env("../","username");
+        $db_name = get_env("../","dbname");
+
         // check pass
         if ($_GET["p"] != "zi3di(ufe31ck433Klls"){
             echo "<script>alert('Please Login !');document.location.href = '/'</script>";
@@ -35,7 +43,7 @@
 
         // fetch all category for user 
         // connect
-        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
+        $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
         $query = "SELECT DISTINCT c.nom FROM public.category c

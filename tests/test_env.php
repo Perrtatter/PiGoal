@@ -7,8 +7,14 @@
 <body>
     <?php
     
-    $username = getenv("USERNAME");
-    
+    // import env
+    require_once __DIR__ . '/../compenents/get_env/get_env.php';
+    echo get_env("../","host") . "\n";
+    echo get_env("../","port") . "\n";
+    echo get_env("../","password") . "\n";
+    echo get_env("../","username") . "\n";
+    echo get_env("../","dbname");
+
     ?>
 </body>
 </html>
