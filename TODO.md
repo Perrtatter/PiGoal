@@ -1,8 +1,7 @@
 # Todo
 
 - Green when all goals of category are done. 
-    - New columns.
-    - New backup .
+    - Do in goal_completer.php ( search all goals with calegory and username )
 - Add category button ( Thank Perrquent ).
     - Front 
     - Back 

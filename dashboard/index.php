@@ -46,7 +46,7 @@
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        $query = "SELECT DISTINCT c.nom FROM public.category c
+        $query = "SELECT DISTINCT c.nom,c.is_complete FROM public.category c
                 INNER JOIN \"user\" u ON u.id = c.user_id
                 WHERE u.username = '$username'";
 
@@ -63,9 +63,15 @@
             echo "<ul>";
             
             // 5. Loop through and print each category name
-            while ($row = pg_fetch_assoc($result)) {
-                // echo "<li>" . htmlspecialchars($row['nom']) . "<br><button class='edit_cal_btn'>✏️</button><button class='del_cal_btn'>🗑️</button></li>";
-                echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<br></li>";
+            while ($row = pg_fetch_assoc($result)) { 
+                if ($row['is_complete'] == "t"){
+                    // echo "<li>" . htmlspecialchars($row['nom']) . "<br><button class='edit_cal_btn'>✏️</button><button class='del_cal_btn'>🗑️</button></li>";
+                    echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<br></li>";
+                }
+
+                else{
+                    echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<br></li>";
+                }
 
             }
             
