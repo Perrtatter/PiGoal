@@ -41,8 +41,10 @@ insert into c ( select id limit 1 )+1,+1,+1,+1
 */
 
 -- clear le q et p 
- update goal set is_complete=false
- update "user" set nbr_point=0;
+update goal set is_complete=false
+update "user" set nbr_point=0;
+
+-- ( tools/clean_data.py )
 
 -- ajouter des points 
 ---------------------
