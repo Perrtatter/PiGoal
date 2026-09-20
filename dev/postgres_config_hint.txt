@@ -6,4 +6,5 @@ listen_addresses = '*'
 pg_hba.conf     : show hba_file;
 ------------------------------------
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
-host    postgres        postgres        172.22.22.35/32         scram-sha-256
+host    all             all             0.0.0.0/0               scram-sha-256
+host    all             all             ::/0                    scram-sha-256
