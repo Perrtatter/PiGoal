@@ -22,6 +22,8 @@
     <div align="center">
     <div id="toast-container"></div>
 
+    <div id="menu-container"></div>
+
     <?php
         // check pass
         if ($_GET["p"] != "zi3di(ufe31ck433Klls"){
@@ -35,7 +37,7 @@
 
         // fetch all category for user 
         // connect
-        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
+        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=postgres";
         $dbconn = pg_connect($connection_string);
 
         $query = "SELECT DISTINCT c.nom FROM public.category c
@@ -70,7 +72,7 @@
 
         $row = pg_fetch_assoc($result);
 
-        echo '<button id="add_cat_btn" onclick="toast('. "'Not working yet.','info'" .')">+</button>';
+        echo '<button class="add_cat_btn" onclick="createCategory()">+</button>';
 
         echo "<p id='point_p'>";
         echo $row["nbr_point"];

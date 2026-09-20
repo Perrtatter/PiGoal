@@ -12,7 +12,7 @@
         $category = $_GET["category"];
 
         // connect
-        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
+        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=postgres";
         $dbconn = pg_connect($connection_string);
 
         $query = "update goal set is_complete=true where id=" . $goal_id;

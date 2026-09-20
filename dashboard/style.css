@@ -65,7 +65,7 @@ li button{
     color:yellow;
 }
 
-#add_cat_btn{
+.add_cat_btn{
     margin-bottom: 20px;
     padding:10px;
     border-radius: 10px;
@@ -76,7 +76,58 @@ li button{
     margin-top: 20px;
 }
 
-#add_cat_btn:hover{
+.add_cat_btn:hover{
     background-color: rgb(8, 204, 21);
     cursor:pointer;
+}
+
+
+#create-category-menu{
+    background-color: black;
+    width: 100vw;
+    height: 110%;
+    position: absolute;
+    top:-100px;
+    opacity: 0.7;
+}
+
+#menu{
+    background-color: transparent;
+    width: 65vw;
+    height: 55%;
+    z-index: 100;
+    margin-left: 17vw;
+    position: absolute;
+}
+
+#menu .header{
+        position: relative;
+    padding-top: 11px;
+    bottom: -1px;
+    font-weight: bold;
+    width: 99%;
+    height: 10%;
+    padding-right: 5px;
+    background-color: #272727;
+    font-size: 104.5%;
+}
+
+
+#menu .content{
+    background-color: #151615;
+    height: 50%;
+    margin-top: -6%;
+}
+
+#menu .header #close-button{
+    position: relative;
+    margin-left: -93%;
+    margin-right: 4%;
+    margin-top: -7%;
+    border-radius: 10px;
+    background-color: rgb(247, 74, 74);
+    color: white;
+    font-weight: bold;
+    outline: none;
+    border: none;
 }

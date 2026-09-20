@@ -28,7 +28,7 @@
         echo "<h1 id='hello_h1'>$category</h1>";
 
         // connect
-        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
+        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=postgres";
         $dbconn = pg_connect($connection_string);
 
         $query = "SELECT g.id,g.nom,g.type,g.is_complete FROM public.goal g inner join category c on g.id = c.goal_id where c.nom = '$category' and c.user_id = ( select id from \"user\" where username = '$username' ) order by type asc";
