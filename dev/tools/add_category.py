@@ -65,6 +65,6 @@ for i in range(4):
     cursor.execute(f"insert into category(user_id,goal_id,nom) values({user_input},{last_goal_id-i},'{category_input}');")
     connect.commit()
 
-
+# close
 cursor.close()
 connect.close()

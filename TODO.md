@@ -1,8 +1,6 @@
 # Todo
 
-- Green when all goals of category are done. 
-    - Do in goal_completer.php ( search all goals with calegory and username )
 - Add category button ( Thank Perrquent ).
-    - Back 
+    - Back ( redirect -> php system dev/tool/add_category.php )
 
-Corriger le system de coche.... Perrtathys ?
+- Remove category tool
