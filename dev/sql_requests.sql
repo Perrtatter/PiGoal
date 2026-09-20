@@ -40,6 +40,9 @@ insert into q
 insert into c ( select id limit 1 )+1,+1,+1,+1
 */
 
+-- clear le q et p 
+ update goal set is_complete=false
+ update "user" set nbr_point=0;
 
 -- ajouter des points 
 ---------------------

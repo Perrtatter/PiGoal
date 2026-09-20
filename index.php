@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="compenents/toast/toast.css">
     <script src="compenents/toast/toast.js"></script>
+    <script src="compenents/get_env/get_env.js"></script>
 
     <link rel="shortcut icon" href="assets/diamond.png" type="image/png">
 </head>
@@ -25,14 +26,22 @@
         </form>
 
         <?php
+            // import env
+            require_once __DIR__ . '/compenents/get_env/get_env.php';
+            $db_host = get_env("./","host");
+            $db_port = get_env("./","port");
+            $db_password = get_env("./","password");
+            $db_username = get_env("./","username");
+            $db_name = get_env("./","dbname");
+            
+
             // get creds
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
             
-            
             // connect
-            $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=postgres";
+            $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
             $dbconn = pg_connect($connection_string);
 
             // 1. Query only the user matching the provided username
@@ -49,7 +58,7 @@
                     echo "<script'>toast('Correct password.', 'success')</script>";
 
                     // redirect to dashboard
-                    echo "<script>document.location.href = 'http://localhost:3000/dashboard/index.php?p=zi3di(ufe31ck433Klls&user=$username'</script>";
+                    echo "<script>document.location.href = 'dashboard/index.php?p=zi3di(ufe31ck433Klls&user=$username'</script>";
                 }
 
                 else{

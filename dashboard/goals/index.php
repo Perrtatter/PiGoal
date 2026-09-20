@@ -23,12 +23,20 @@
     <div id="toast-container"></div>
 
     <?php
+        // import env
+        require_once __DIR__ . '/../../compenents/get_env/get_env.php';
+        $db_host = get_env("../../","host");
+        $db_port = get_env("../../","port");
+        $db_password = get_env("../../","password");
+        $db_username = get_env("../../","username");
+        $db_name = get_env("../../","dbname");
+
         $category = $_GET["category"];
         $username = $_GET["username"];
         echo "<h1 id='hello_h1'>$category</h1>";
 
         // connect
-        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=postgres";
+        $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
         $query = "SELECT g.id,g.nom,g.type,g.is_complete FROM public.goal g inner join category c on g.id = c.goal_id where c.nom = '$category' and c.user_id = ( select id from \"user\" where username = '$username' ) order by type asc";
@@ -60,7 +68,7 @@
                 }
 
                 else{
-                    echo "<li onclick='complete_goal(" . $row['id'] . ',"' . $username . '","' . $category . '"' . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
+                    echo "<li onclick='complete_goal(" . $row['id'] . ',"' . $username . '","' . $category . '",' . $row["type"] . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
                 }
 
             }
