@@ -48,12 +48,18 @@
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        $query = "SELECT DISTINCT c.nom,c.is_complete FROM public.category c
-                INNER JOIN \"user\" u ON u.id = c.user_id
-                WHERE u.username = '$username'";
+        $query = '
+            SELECT DISTINCT c.nom, c.is_complete
+            FROM public.category c
+            INNER JOIN "user" u ON u.id = c.user_id
+            WHERE u.username = $1
+        ';
 
-        // 2. Execute the query
-        $result = pg_query($dbconn, $query);
+        $result = pg_query_params($dbconn, $query, [$username]);
+
+        if ($result === false) {
+            die("Erreur SQL : " . pg_last_error($dbconn));
+        }
 
 
         // 4. Check if any categories were found
