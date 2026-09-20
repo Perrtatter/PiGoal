@@ -3,9 +3,9 @@ function complete_goal(goal_id,username,category,goal_type){
     document.location.href = "goal_completer.php?goal_id=" + goal_id + "&username=" + username + "&category=" + category + "&goal_type=" + goal_type
 }
 
-function uncomplete_goal(goal_id,username,category){
+function uncomplete_goal(goal_id,username,category,goal_type){
     toast('Goal uncomplete.', 'success')
-    document.location.href = "goal_uncompleter.php?goal_id=" + goal_id + "&username=" + username + "&category=" + category
+    document.location.href = "goal_uncompleter.php?goal_id=" + goal_id + "&username=" + username + "&category=" + category + "&goal_type=" + goal_type
 }
 
 

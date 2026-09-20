@@ -62,6 +62,18 @@ select type from goal where id=$goal_id;
 -- voir la table des point en haut
 
 
+-- compter nombre de g is_complete par c
+SELECT count(g.*) FROM public.goal g
+inner join category c on g.id = c.goal_id
+
+where c.nom = 'Gym' -- $category_name
+and c.user_id = ( select id from "user" where username = 'Mathys' /* $username */ )
+
+and g.is_complete = true
+-- if 4 : c.is_complete = true
+
+SELECT count(g.*) FROM public.goal g inner join category c on g.id = c.goal_id where c.nom = 'Gym' and c.user_id = ( select id from "user" where username = 'Mathys' ) and g.is_complete = true;
+
         /*
         // fetch all category for user 
         // connect
