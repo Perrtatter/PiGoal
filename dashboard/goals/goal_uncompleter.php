@@ -32,7 +32,7 @@
         
 
         // go back on page 
-        echo '<script>document.location.href = "http://localhost:3000/dashboard/goals/index.php?username=' . $username . "&category=" . $category . '"</script>';
+        echo '<script>document.location.href = "index.php?username=' . $username . "&category=" . $category . '"</script>';
     ?>
 
 </body>

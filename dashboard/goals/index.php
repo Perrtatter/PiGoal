@@ -64,7 +64,7 @@
             // 5. Loop through and print each goal name
             while ($row = pg_fetch_assoc($result)) {
                 if ($row['is_complete'] == "t"){
-                    echo "<li class='complete' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
+                    echo "<li class='complete' onclick='uncomplete_goal(" . $row['id'] . ',"' . $username . '","' . $category . '"' . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
                 }
 
                 else{
