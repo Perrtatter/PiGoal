@@ -62,7 +62,7 @@ select type from goal where id=$goal_id;
 -- voir la table des point en haut
 
 
--- compter nombre de g is_complete par c
+-- compter nombre de g is_complete par c et u 
 SELECT count(g.*) FROM public.goal g
 inner join category c on g.id = c.goal_id
 

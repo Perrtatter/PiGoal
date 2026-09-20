@@ -37,33 +37,39 @@
         pg_free_result($result);
         
 
-        // go back on page 
-        echo '<script>document.location.href = "index.php?username=' . $username . "&category=" . $category . '"</script>';
-
-        /*
-                // complete or not category
+        // complete or not category
         // execute
-        $query = "SELECT count(g.*) 
-                FROM public.goal g 
-                INNER JOIN category c ON g.id = c.goal_id 
-                WHERE c.nom = $category
-                    AND c.user_id = (SELECT id FROM \"user\" WHERE username = $username) 
-                    AND g.is_complete = true;";
+        // 1. Parameterized SELECT Query (Replaced variables with $1 and $2)
+        $query_category = 'SELECT count(g.is_complete) AS total_count
+                        FROM public.goal g 
+                        INNER JOIN category c ON g.id = c.goal_id 
+                        WHERE c.nom = $1
+                            AND c.user_id = (SELECT id FROM "user" WHERE username = $2) 
+                            AND g.is_complete = true;';
 
-
-        $result = pg_execute($dbconn, "count_completed_goals", array($category, $username));
+        // Execute directly with parameters in a single step
+        $result = pg_query_params($dbconn, $query_category, array($category, $username));
         $row = pg_fetch_assoc($result);
 
-        if ($row["count"] == 4){
-            // update category
-            $query = "UPDATE category 
-                SET is_complete = true 
-                WHERE nom = $category_name 
-                AND user_id = (SELECT id FROM \"user\" WHERE username = $username)";
+        // Using the explicit alias "total_count" defined in the SELECT statement
+        if ((int)$row["total_count"] != 4) {
+            
+            // 2. Parameterized UPDATE Query (Replaced variables with $1 and $2)
+            $query_update = 'UPDATE category 
+                            SET is_complete = false 
+                            WHERE nom = $1 
+                            AND user_id = (SELECT id FROM "user" WHERE username = $2);';
 
-            $result = pg_query($dbconn, $query);
-        }
-        */
+            // Execute the update query safely
+            $update_result = pg_query_params($dbconn, $query_update, array($category, $username));
+        } 
+
+        // 3. Go back to page (Cleaned up URL parameter encoding)
+        echo '<script>document.location.href = "index.php?username=' . $username . "&category=" . $category . '"</script>';
+        
+
+        // go back on page 
+        echo '<script>document.location.href = "index.php?username=' . $username . "&category=" . $category . '"</script>';
     ?>
 
 </body>
