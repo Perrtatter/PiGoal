@@ -6,6 +6,14 @@
     <script src="script.js"></script>
 <body>
     <?php
+        // import env
+        require_once __DIR__ . '/../../compenents/get_env/get_env.php';
+        $db_host = get_env("../../","host");
+        $db_port = get_env("../../","port");
+        $db_password = get_env("../../","password");
+        $db_username = get_env("../../","username");
+        $db_name = get_env("../../","dbname");
+
         // get params
         $goal_id = $_GET["goal_id"];
         $username = $_GET["username"];
@@ -13,7 +21,7 @@
         $goal_type = $_GET["goal_type"];
 
         // connect
-        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
+        $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
         // complete goal in db
