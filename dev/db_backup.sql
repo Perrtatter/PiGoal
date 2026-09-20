@@ -2,11 +2,10 @@
 -- PostgreSQL database dump
 --
 
-
 -- Dumped from database version 18.2 (Postgres.app)
 -- Dumped by pg_dump version 18.0
 
--- Started on 2026-08-29 16:04:43 CEST
+-- Started on 2026-09-20 02:53:05 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -32,7 +31,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.category (
     user_id integer NOT NULL,
     goal_id integer NOT NULL,
-    nom character varying(50) NOT NULL
+    nom character varying(50) NOT NULL,
+    is_complete boolean DEFAULT false NOT NULL
 );
 
 
@@ -70,7 +70,7 @@ CREATE SEQUENCE public.goal_id_seq
 ALTER SEQUENCE public.goal_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3848 (class 0 OID 0)
+-- TOC entry 3849 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: goal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -110,7 +110,7 @@ CREATE SEQUENCE public.user_id_seq
 ALTER SEQUENCE public.user_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3849 (class 0 OID 0)
+-- TOC entry 3850 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -119,7 +119,7 @@ ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
 
 
 --
--- TOC entry 3681 (class 2604 OID 16750)
+-- TOC entry 3682 (class 2604 OID 16750)
 -- Name: goal id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -135,57 +135,57 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 
 
 --
--- TOC entry 3840 (class 0 OID 16738)
+-- TOC entry 3841 (class 0 OID 16738)
 -- Dependencies: 221
 -- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.category VALUES (1, 5, 'Calestenics');
-INSERT INTO public.category VALUES (1, 6, 'Calestenics');
-INSERT INTO public.category VALUES (1, 7, 'Calestenics');
-INSERT INTO public.category VALUES (1, 8, 'Calestenics');
-INSERT INTO public.category VALUES (2, 9, 'Gym');
-INSERT INTO public.category VALUES (2, 10, 'Gym');
-INSERT INTO public.category VALUES (2, 11, 'Gym');
-INSERT INTO public.category VALUES (2, 12, 'Gym');
-INSERT INTO public.category VALUES (1, 16, 'Gym');
-INSERT INTO public.category VALUES (1, 13, 'Gym');
-INSERT INTO public.category VALUES (1, 14, 'Gym');
-INSERT INTO public.category VALUES (1, 15, 'Gym');
+INSERT INTO public.category VALUES (1, 5, 'Calestenics', false);
+INSERT INTO public.category VALUES (1, 6, 'Calestenics', false);
+INSERT INTO public.category VALUES (1, 7, 'Calestenics', false);
+INSERT INTO public.category VALUES (1, 8, 'Calestenics', false);
+INSERT INTO public.category VALUES (2, 9, 'Gym', false);
+INSERT INTO public.category VALUES (2, 10, 'Gym', false);
+INSERT INTO public.category VALUES (2, 11, 'Gym', false);
+INSERT INTO public.category VALUES (2, 12, 'Gym', false);
+INSERT INTO public.category VALUES (1, 16, 'Gym', false);
+INSERT INTO public.category VALUES (1, 13, 'Gym', false);
+INSERT INTO public.category VALUES (1, 14, 'Gym', false);
+INSERT INTO public.category VALUES (1, 15, 'Gym', false);
 
 
 --
--- TOC entry 3842 (class 0 OID 16747)
+-- TOC entry 3843 (class 0 OID 16747)
 -- Dependencies: 223
 -- Data for Name: goal; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.goal VALUES (5, 'HSPU semi-ampli', 4, false);
-INSERT INTO public.goal VALUES (6, 'HSPU coude 90°', 3, false);
 INSERT INTO public.goal VALUES (7, 'HS en elbow', 2, false);
-INSERT INTO public.goal VALUES (8, 'l-sit en HS', 1, false);
+INSERT INTO public.goal VALUES (13, 'side', 4, false);
 INSERT INTO public.goal VALUES (9, '1/2 backfull', 2, false);
 INSERT INTO public.goal VALUES (10, 'backfull', 1, false);
 INSERT INTO public.goal VALUES (11, 'double side', 3, false);
 INSERT INTO public.goal VALUES (12, 'double front', 4, false);
-INSERT INTO public.goal VALUES (13, 'side', 4, false);
-INSERT INTO public.goal VALUES (14, 'side sol', 3, false);
-INSERT INTO public.goal VALUES (15, 'double front', 2, false);
+INSERT INTO public.goal VALUES (5, 'HSPU semi-ampli', 4, false);
+INSERT INTO public.goal VALUES (6, 'HSPU coude 90°', 3, false);
 INSERT INTO public.goal VALUES (16, 'double back', 1, false);
+INSERT INTO public.goal VALUES (15, 'double front', 2, false);
+INSERT INTO public.goal VALUES (14, 'side sol', 3, false);
+INSERT INTO public.goal VALUES (8, 'l-sit en HS', 1, false);
 
 
 --
--- TOC entry 3839 (class 0 OID 16728)
+-- TOC entry 3840 (class 0 OID 16728)
 -- Dependencies: 220
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."user" VALUES (1, 'Mathys', '174dd44f9d8cbed784d676260f13aecd0e04e29f49ca9420645bc45deb649ea7', 0);
 INSERT INTO public."user" VALUES (2, 'Quentyn', 'fdaa1733a7999f41e41878fe887843476a512b39b1da20323b221ec7ed4c6ed6', 0);
+INSERT INTO public."user" VALUES (1, 'Mathys', '174dd44f9d8cbed784d676260f13aecd0e04e29f49ca9420645bc45deb649ea7', 0);
 
 
 --
--- TOC entry 3850 (class 0 OID 0)
+-- TOC entry 3851 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: goal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -194,7 +194,7 @@ SELECT pg_catalog.setval('public.goal_id_seq', 16, true);
 
 
 --
--- TOC entry 3851 (class 0 OID 0)
+-- TOC entry 3852 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -203,7 +203,7 @@ SELECT pg_catalog.setval('public.user_id_seq', 2, true);
 
 
 --
--- TOC entry 3686 (class 2606 OID 16745)
+-- TOC entry 3687 (class 2606 OID 16745)
 -- Name: category category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -212,7 +212,7 @@ ALTER TABLE ONLY public.category
 
 
 --
--- TOC entry 3688 (class 2606 OID 16756)
+-- TOC entry 3689 (class 2606 OID 16756)
 -- Name: goal goal_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -221,7 +221,7 @@ ALTER TABLE ONLY public.goal
 
 
 --
--- TOC entry 3684 (class 2606 OID 16737)
+-- TOC entry 3685 (class 2606 OID 16737)
 -- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -230,7 +230,7 @@ ALTER TABLE ONLY public."user"
 
 
 --
--- TOC entry 3689 (class 2606 OID 16762)
+-- TOC entry 3690 (class 2606 OID 16762)
 -- Name: category fk_category_goal; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -239,7 +239,7 @@ ALTER TABLE ONLY public.category
 
 
 --
--- TOC entry 3690 (class 2606 OID 16757)
+-- TOC entry 3691 (class 2606 OID 16757)
 -- Name: category fk_category_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -247,7 +247,7 @@ ALTER TABLE ONLY public.category
     ADD CONSTRAINT fk_category_user FOREIGN KEY (user_id) REFERENCES public."user"(id);
 
 
--- Completed on 2026-08-29 16:04:43 CEST
+-- Completed on 2026-09-20 02:53:05 CEST
 
 --
 -- PostgreSQL database dump complete
