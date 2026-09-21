@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="../../compenents/toast/toast.css">
     <script src="../../compenents/toast/toast.js"></script>
+    <script src="../../compenents/send_post/send_post.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
@@ -31,8 +32,8 @@
         $db_username = get_env("../../","username");
         $db_name = get_env("../../","dbname");
 
-        $category = $_GET["category"];
-        $username = $_GET["username"];
+        $category = $_POST["category"];
+        $username = $_POST["username"];
         echo "<h1 id='hello_h1'>$category</h1>";
 
         // connect
@@ -63,19 +64,32 @@
             
             // 5. Loop through and print each goal name
             while ($row = pg_fetch_assoc($result)) {
+                // gen data
+                $data = json_encode(array(
+                    "username"=>$username,
+                    "category"=>$category,
+                    "goal_id"=>$row["id"],
+                    "goal_type"=>$row["type"]
+                ));
+
                 if ($row['is_complete'] == "t"){
-                    echo "<li class='complete' onclick='uncomplete_goal(" . $row['id'] . ',"' . $username . '","' . $category . '",'. $row["type"] . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
+                    echo "<li class='complete' onclick='send_post(" . '"' . "goal_uncompleter.php" . '",' . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
                 }
 
                 else{
-                    echo "<li onclick='complete_goal(" . $row['id'] . ',"' . $username . '","' . $category . '",' . $row["type"] . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
+                    echo "<li onclick='send_post(" . '"' . "goal_completer.php" . '",' . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
                 }
 
             }
             
             // go back button 
-            echo '<button id="go_back_btn" onclick="go_back(' . "'" . $username . "'" .')">Go back</button>';
+            // gen data 
+            $data = json_encode(array(
+                "user"=>$username,
+                "token"=>"zi3di(ufe31ck433Klls"
+            ));
 
+            echo "<button id='go_back_btn' onclick='send_post(" . '"' . "../index.php" . '",' . $data . ")'>Go back</button>";
             echo "</ul><br>";
         }
         

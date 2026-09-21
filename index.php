@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="compenents/toast/toast.css">
     <script src="compenents/toast/toast.js"></script>
     <script src="compenents/get_env/get_env.js"></script>
+    <script src="compenents/send_post/send_post.js"></script>
 
     <link rel="shortcut icon" href="assets/diamond.png" type="image/png">
 </head>
@@ -58,7 +59,13 @@
                     echo "<script'>toast('Correct password.', 'success')</script>";
 
                     // redirect to dashboard
-                    echo "<script>document.location.href = 'dashboard/index.php?p=zi3di(ufe31ck433Klls&user=$username'</script>";
+                    $data = json_encode(array(
+                        "token"=>"zi3di(ufe31ck433Klls",
+                        "user"=>$username
+                    ));
+
+                    
+                    echo "<script>send_post('dashboard/index.php',$data)</script>";
                 }
 
                 else{

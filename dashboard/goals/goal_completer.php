@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
-<body>
+    <script src="../../compenents/send_post/send_post.js"></script>
+<body style="background-color:rgb(44,44,44);">
     <?php
         // import env
         require_once __DIR__ . '/../../compenents/get_env/get_env.php';
@@ -15,10 +16,10 @@
         $db_name = get_env("../../","dbname");
 
         // get params
-        $goal_id = $_GET["goal_id"];
-        $username = $_GET["username"];
-        $category = $_GET["category"];
-        $goal_type = $_GET["goal_type"];
+        $goal_id = $_POST["goal_id"];
+        $username = $_POST["username"];
+        $category = $_POST["category"];
+        $goal_type = $_POST["goal_type"];
 
         // connect
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
@@ -65,8 +66,13 @@
         } 
 
         // 3. Go back to page (Cleaned up URL parameter encoding)
-        echo '<script>document.location.href = "index.php?username=' . $username . "&category=" . $category . '"</script>';
-        
+        $data = json_encode(array(
+            "category"=>$category,
+            "username"=>$username
+        ));
+
+                    
+        echo "<script>send_post('index.php',$data)</script>";        
     ?>
 
 </body>

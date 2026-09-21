@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="../compenents/toast/toast.css">
     <script src="../compenents/toast/toast.js"></script>
+    <script src="../compenents/send_post/send_post.js"></script>
 </head>
 <body>
     <div align="center">
@@ -34,12 +35,12 @@
         $db_name = get_env("../","dbname");
 
         // check pass
-        if ($_GET["p"] != "zi3di(ufe31ck433Klls"){
+        if ($_POST["token"] != "zi3di(ufe31ck433Klls"){
             echo "<script>alert('Please Login !');document.location.href = '/'</script>";
         }
 
         else{
-            $username = $_GET["user"];
+            $username = $_POST["user"];
             echo "<h1 id='hello_h1'>Hello $username</h1>";
         }
 
@@ -64,7 +65,7 @@
 
         // 4. Check if any categories were found
         if (pg_num_rows($result) === 0) {
-            echo "No categories found for user $username.";
+            echo "No categories found for user $username.<br>";
         } 
         
         else {
@@ -72,14 +73,21 @@
             
             // 5. Loop through and print each category name
             while ($row = pg_fetch_assoc($result)) { 
+                // gen data 
+                $data = json_encode(array(
+                    "username"=>$username,
+                    "category"=>$row["nom"]
+
+                ));
+
                 if ($row['is_complete'] == "t"){
                     // echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
-                    echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "</li>";
+                    echo "<li class='complete' onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . "</li>";
                 }
 
                 else{
                     // echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
-                    echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "</li>";
+                    echo "<li onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . "</li>";
                 }
 
             }
