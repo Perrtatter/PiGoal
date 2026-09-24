@@ -1,4 +1,4 @@
-# Goal App DB
+# Pigoal
  
 ## Run server 
 Use Vscode `PHP Server`
