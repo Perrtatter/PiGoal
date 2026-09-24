@@ -26,6 +26,8 @@
             <div id="toast-container"></div>
         </form>
 
+        <button onclick="document.location.href = 'create_account/'" id="create_acc_btn">Create Account</button>
+
         <?php
             // import env
             require_once __DIR__ . '/compenents/get_env/get_env.php';
@@ -41,43 +43,43 @@
                 $username = $_POST['username'];
                 $password = $_POST['password'];
             
-            // connect
-            $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
-            $dbconn = pg_connect($connection_string);
+                // connect
+                $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
+                $dbconn = pg_connect($connection_string);
 
-            // 1. Query only the user matching the provided username
-            $query = 'SELECT password_hash FROM "user" WHERE username = ' ."'$username'";
+                // 1. Query only the user matching the provided username
+                $query = 'SELECT password_hash FROM "user" WHERE username = ' ."'$username'";
 
-            // 2. Execute safely with parameters
-            $result = pg_query($dbconn, $query);
+                // 2. Execute safely with parameters
+                $result = pg_query($dbconn, $query);
 
-            if ($result && pg_num_rows($result) > 0) {
-                // 3. Fetch the row (no loop needed since usernames should be unique)
-                $row = pg_fetch_assoc($result);
-                
-                if ($row["password_hash"] == hash("sha256",$password)){
-                    echo "<script'>toast('Correct password.', 'success')</script>";
-
-                    // redirect to dashboard
-                    $data = json_encode(array(
-                        "token"=>"zi3di(ufe31ck433Klls",
-                        "user"=>$username
-                    ));
-
+                if ($result && pg_num_rows($result) > 0) {
+                    // 3. Fetch the row (no loop needed since usernames should be unique)
+                    $row = pg_fetch_assoc($result);
                     
-                    echo "<script>send_post('dashboard/index.php',$data)</script>";
+                    if ($row["password_hash"] == hash("sha256",$password)){
+                        echo "<script>toast('Correct password.', 'success')</script>";
+
+                        // redirect to dashboard
+                        $data = json_encode(array(
+                            "token"=>"zi3di(ufe31ck433Klls",
+                            "user"=>$username
+                        ));
+
+                        
+                        echo "<script>send_post('dashboard/index.php',$data)</script>";
+                    }
+
+                    else{
+                        echo "<script>toast('Wrong password.', 'error')</script>";
+                    }
+            
+                } else {
+                    echo "<script>toast('User not found.', 'error')</script>";
                 }
 
-                else{
-                    echo "<script>toast('Wrong password.', 'error')</script>";
-                }
-        
-            } else {
-                echo "<script>toast('User not found.', 'error')</script>";
-            }
-
-            // Free memory result
-            pg_free_result($result);
+                // Free memory result
+                pg_free_result($result);
             }
         ?>
     </div>
