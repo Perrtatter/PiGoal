@@ -11,9 +11,9 @@ php -S locahost:3000
 ```
 
 ## Go 
-Public URL : http://144.2.113.93
+HTTP URL : http://144.2.113.93
 
-Local URL ( if server running ) : http://localhost:3000
+HTTPS URL  : https://www.pigoal.ch
 
 ## Feature
  - Login
