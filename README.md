@@ -3,10 +3,24 @@
 ## Run server 
 Use Vscode `PHP Server`
 
+> or 
+
+Install PHP in local ( enable `pqsl` extension ) and run PHP Server :
+```
+php -S locahost:3000
+```
+
 ## Go 
-Current URL : http://144.2.113.93
+Public URL : http://144.2.113.93
 
-Test> Iam Perrquent, this is my first commit..... 🤓👆
+Local URL ( if server running ) : http://localhost:3000
 
-
-Test Pc EPTM
+## Feature
+ - Login
+ - Create User
+ - Display category
+ - Complete Goal
+ - Uncomplete Goal
+ - Complete category
+ - Points per user
+ 
