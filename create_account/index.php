@@ -27,10 +27,12 @@
 
 
             <button class="glow_button" type="submit">Create</button>
-            <p id="OrAccount"> or </p>
-            <button onclick="document.location.href = '../index.php'">Login</button>
-            <div id="toast-container"></div>
         </form>
+
+        <p id="OrAccount"> or </p>
+        <button onclick="document.location.href = '..'">Login</button>
+        <div id="toast-container"></div>
+
 
         <?php
             // import env
@@ -49,7 +51,7 @@
                 $confirm = $_POST['confirm'];
 
                 # compare
-                if ($password != $confirm){
+                if ($password != $confirm || $password == ''){
                     echo "<script>toast('Password not matching.', 'error')</script>";
                 }
 

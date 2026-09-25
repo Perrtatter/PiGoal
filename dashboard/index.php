@@ -50,13 +50,7 @@
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        $query = '
-            SELECT DISTINCT c.nom, c.is_complete
-            FROM public.category c
-            INNER JOIN "user" u ON u.id = c.user_id
-            WHERE u.username = $1
-        ';
-
+        $query = "SELECT c.nom, c.is_complete, COUNT(CASE WHEN g.is_complete = true THEN 1 END) AS nbr_g_complete FROM public.category c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete;";
         $result = pg_query_params($dbconn, $query, [$username]);
 
         if ($result === false) {
@@ -81,14 +75,18 @@
 
                 ));
 
+                // fetch number complete per category
+                $nbr_complete = 1;
+
+
                 if ($row['is_complete'] == "t"){
                     // echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
-                    echo "<li class='complete' onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . "</li>";
+                    echo "<li class='complete' onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . " <span style='font-weight: bold;'>". $row['nbr_g_complete'] ."/4</span></li>";
                 }
 
                 else{
                     // echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
-                    echo "<li onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . "</li>";
+                    echo "<li onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . " <span style='font-weight: bold;'>". $row['nbr_g_complete'] ."/4</span></li>";
                 }
 
             }
