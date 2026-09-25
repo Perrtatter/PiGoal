@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pigoal | Dashboard</title>
     <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="shortcut icon" href="../assets/diamond.png" type="image/png">
 
 
@@ -15,8 +15,9 @@
 </head>
 <body>
     <div align="center">
-        <div id="logo_bg">
-            <img src="../assets/diamond.png" id="logo">
+        <div id="logo_bg" style="">
+            <img src="/assets/logo.png" id="logo">
+        <div id="logo_glow"></div>
         </div>
     </div>
 
@@ -101,7 +102,7 @@
 
         $row = pg_fetch_assoc($result);
 
-        echo '<button class="add_cat_btn" onclick="createCategory()">+</button>';
+        echo '<button class="glow_button" onclick="createCategory()">+</button>';
 
         echo "<p id='point_p'>";
         echo $row["nbr_point"];

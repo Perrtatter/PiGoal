@@ -11,21 +11,20 @@
     <script src="compenents/get_env/get_env.js"></script>
     <script src="compenents/send_post/send_post.js"></script>
 
-    <link rel="shortcut icon" href="assets/diamond.png" type="image/png">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/png">
 </head>
 <body>
     <div align="center">
-        <img src="assets/diamond.png" id="logo">
-        <br><br>
-
-        <form action="index.php" method="post">
-            <input type="text" placeholder="Username :" name="username"><br>
-            <input type="password" placeholder="Password :" name="password"><br>
-
-            <button type="submit">Login</button>
+        <img src="assets/logo.png" id="logo">
+        <div id="logo_glow"></div>
+        <h1 style="margin-top:-10px; font-size:70px; background: linear-gradient(182deg, #ffffff, #b4b4b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Pi<span style="background: linear-gradient(179deg, #6fe9d0, #129dd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Goal</span></h1>
+        <form action="index.php" method="post" style="margin-top:-30px;">
+            <input class="input" type="text" style="background-image: url('./assets/icons/user.svg');" placeholder="Username :" name="username"><br>
+            <input class="input" type="password" style="background-image: url('./assets/icons/key.svg');" placeholder="Password :" name="password"><br>
+            <button class="glow_button" type="submit">Login</button>
             <div id="toast-container"></div>
         </form>
-
+        <p id="OrAccount"> ou </p>
         <button onclick="document.location.href = 'create_account/'" id="create_acc_btn">Create Account</button>
 
         <?php

@@ -1,14 +1,42 @@
-body{
-    background-color: rgb(44, 44, 44);
+body {
+    position: relative;
+    min-height: 50vh; 
+    margin: 0;         
+    display: flex;     
     flex-direction: column;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-size: cover;
+    background-repeat: repeat;
 }
+
+body::before {
+    content: "";
+    position: fixed;  
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("./assets/background_light.jpg");
+    background-size: cover;    
+    background-position: center; 
+    filter: brightness(0.4);    
+    z-index: -1;       
+}
+
 
 
 #logo{
     height: 150px;
     width:150px;
+}
+
+#logo_glow{
+   height: 0px;
+    width: 0px;
+    margin-top: -73px;
+    margin-bottom: 65px;
+    box-shadow: 0px 0px 105px 45px rgba(15,247,255,0.6);
 }
 
 input{
@@ -29,14 +57,289 @@ button{
     margin-top: 30px;
     background-color: rgb(106, 106, 106);
     color:white;
+    min-width: 200px;
     cursor:pointer
-}
-
-button:active{
-    background-color: rgb(209, 209, 209);
-    color:black;
 }
 
 #create_acc_btn{
     margin-top:10px;
+}
+
+
+.input {
+  width: 100%;
+  max-width: 400px;
+  width: 66vw;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #1f2937; 
+  background-color: #ffffff;
+  border: 1.5px solid #d1d5db; 
+  border-radius: 8px; 
+  min-width: 200px;
+  outline: none;
+  appearance: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,transform 0.2s ease,filter 0.2s ease;
+  padding: 12px 39px;
+  background-position: 2px 6px;
+  background-repeat: no-repeat;
+  background-size: 29px;
+}
+.input::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+.input:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(101, 113, 114, 0.794);
+}
+.input:focus {
+    outline: none;
+    color:#1f2937;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); 
+}
+
+.input:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+
+
+
+#OrAccount {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 66vw;
+  max-width: 400px;
+  min-width: 200px;
+  margin: 24px auto;
+  font-family: inherit;
+  font-size: 0.7rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+#OrAccount::before,
+#OrAccount::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #d1d5db;
+}
+
+#OrAccount::before {
+  margin-right: 16px;
+}
+
+#OrAccount::after {
+  margin-left: 16px;
+}
+
+
+#create_acc_btn {
+  width: 66vw;
+  max-width: 400px;
+  padding: 12px 24px;
+  margin-top: 0px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #1f2937;
+  background-color: #f9fafb; 
+  border: 1px solid #d1d5db;
+  border-radius: 8px; 
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,transform 0.2s ease,filter 0.2s ease;
+}
+#create_acc_btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(101, 113, 114, 0.794);
+}
+
+#create_acc_btn:active {
+  background-color: #e5e7eb;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .input {
+    background-color: #1f2937;
+    border-color: #4b5563;
+    color: rgb(183, 180, 180);
+  }
+  .input::placeholder {
+    color: #6b7280;
+  }
+  .input:hover {
+    border-color: #6b7280;
+    color: rgb(183, 180, 180);
+  }
+  .input:focus {
+    outline: none;
+    color: rgb(183, 180, 180);
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
+  }
+  .input:disabled {
+    background-color: #111827;
+    color: #4b5563;
+  }
+  body::before {
+    background-image: url("./assets/background.png");   
+    }
+    #OrAccount {
+    color: #9ca3af;
+  }
+  #OrAccount::before,
+  #OrAccount::after {
+    border-bottom-color: #4b5563;
+  }
+
+  #create_acc_btn{background-color: #1f2937;
+    border: #4b5563;
+    color: #6b7280;
+    border: 1px solid; 
+    border-radius: 8px; 
+    font-size: 15px;
+    margin-top: 0px;
+    max-width: 400px;}
+    #create_acc_btn:hover{
+    color: rgb(183, 180, 180);}
+}
+
+
+li{
+    background-color: grey;
+    margin-top: 20px;
+    padding: 15px;
+    margin-left: -30px;
+    list-style-type: none; 
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+li:hover{
+    background-color: rgb(153, 151, 151);
+    
+}
+
+
+li button{
+    padding:5px;
+    border-radius: 5px;
+    border:none;
+    margin-left:10px;
+}
+
+.del_cal_btn{
+    background-color: rgb(255, 0, 0);
+}
+
+
+.del_cal_btn:hover{
+    background-color: rgb(251, 103, 103);
+    cursor: pointer;
+}
+
+
+#point_p{
+    font-size: 20px;
+    color:yellow;
+}
+
+.glow_button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  max-width: 400px;
+  width: 66vw;
+    padding: 16px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #42e8f5, #00bfd8);
+    color: #07151c;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 220, 255, 0.35);
+    transition: 
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.glow_button:hover {
+    background: linear-gradient(135deg, #65f1fa, #00d9f0);
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 220, 255, 0.6);
+}
+
+.glow_button:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 15px rgba(0, 220, 255, 0.4);
+}
+
+.complete{
+    background-color: rgb(0, 108, 0);
+}
+
+.complete:hover{
+    background-color: rgb(5, 172, 5);
+}
+
+#create-category-menu{
+    background-color: black;
+    width: 100vw;
+    height: 110%;
+    position: absolute;
+    top:-100px;
+    opacity: 0.7;
+}
+
+#menu{
+    background-color: transparent;
+    width: 65vw;
+    height: 55%;
+    z-index: 100;
+    margin-left: 17vw;
+    position: absolute;
+}
+
+#menu .header{
+        position: relative;
+    padding-top: 11px;
+    bottom: -1px;
+    font-weight: bold;
+    width: 99%;
+    height: 10%;
+    padding-right: 5px;
+    background-color: #272727;
+    font-size: 104.5%;
+}
+
+
+#menu .content{
+    background-color: #151615;
+    height: 50%;
+    margin-top: -6%;
+}
+
+#menu .header #close-button{
+    position: relative;
+    margin-left: -93%;
+    margin-right: 4%;
+    margin-top: -7%;
+    border-radius: 10px;
+    background-color: rgb(247, 74, 74);
+    color: white;
+    font-weight: bold;
+    outline: none;
+    border: none;
 }
