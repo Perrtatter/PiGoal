@@ -15,7 +15,7 @@ inner join goal q on q.id = c.goal_id
 ---------------------
 select distinct c.nom from public.category c
 inner join "user" u on u.id = c.user_id
-where u.username = 'Mathys' -- $username
+where u.username = $username
 
 
 -- avoir g par c et u nom
@@ -23,14 +23,14 @@ where u.username = 'Mathys' -- $username
 SELECT g.nom,g.type,g.is_complete FROM public.goal g
 inner join category c on g.id = c.goal_id
 
-where c.nom = 'Gym' -- $category_name
-and c.user_id = ( select id from "user" where username = 'Mathys' /* $username */ )
+where c.nom = $category_name
+and c.user_id = ( select id from "user" where username = $username  )
 order by type asc
 
 
 -- suppreîmer c
 ---------------------
-delete from category where nom = 'Gym' -- $category_name
+delete from category where nom = $category_name
 
 
 -- ajouter c et q
@@ -48,7 +48,7 @@ update "user" set nbr_point=0;
 
 -- ajouter des points 
 ---------------------
-update "user" set nbr_point=25 where username='Mathys' -- $username
+update "user" set nbr_point=25 where username=$username
 
 
 -- completer goal 
@@ -66,18 +66,18 @@ select type from goal where id=$goal_id;
 SELECT count(g.*) FROM public.goal g
 inner join category c on g.id = c.goal_id
 
-where c.nom = 'Gym' -- $category_name
-and c.user_id = ( select id from "user" where username = 'Mathys' /* $username */ )
+where c.nom = $category_name
+and c.user_id = ( select id from "user" where username = $username )
 
 and g.is_complete = true
 -- if 4 : c.is_complete = true
 
-SELECT count(g.*) FROM public.goal g inner join category c on g.id = c.goal_id where c.nom = 'Gym' and c.user_id = ( select id from "user" where username = 'Mathys' ) and g.is_complete = true;
+SELECT count(g.*) FROM public.goal g inner join category c on g.id = c.goal_id where c.nom = $category_name and c.user_id = ( select id from "user" where username = $username ) and g.is_complete = true;
 
         /*
         // fetch all category for user 
         // connect
-        $connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
+        $connection_string = "host=$host port=$port dbname=$dbname user=$username password=$password";
         $dbconn = pg_connect($connection_string);
 
         $query = "SELECT DISTINCT c.nom FROM public.category c

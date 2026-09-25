@@ -1,12 +1,12 @@
 <?php
 
 // connect
-$connection_string = "host=localhost port=5432 dbname=goal_app_db user=postgres password=password";
+$connection_string = "host=$host port=$port dbname=$dbname user=$username password=$password";
 $dbconn = pg_connect($connection_string);
 
 
 // simple fetch ( 1 row output )
-$query = 'select nbr_point from "user" where username = ' . "'Mathys'";
+$query = 'select nbr_point from "user" where username = ' . "'$username'";
 $result = pg_query($dbconn, $query);
 
 $row = pg_fetch_assoc($result);
