@@ -11,8 +11,6 @@ php -S locahost:3000
 ```
 
 ## Go 
-HTTP URL : http://144.2.113.93
-
 HTTPS URL  : https://www.pigoal.ch
 
 ## Feature
