@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goal App DB | Create Account</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
     <link rel="stylesheet" href="../compenents/toast/toast.css">
     <script src="../compenents/toast/toast.js"></script>
@@ -15,15 +15,20 @@
 </head>
 <body>
     <div align="center">
-        <img src="../assets/diamond.png" id="logo">
+        <img src="../assets/logo.png" id="logo">
+        <div id="logo_glow"></div>
+        <h1 style="margin-top:-10px; font-size:70px; background: linear-gradient(182deg, #ffffff, #b4b4b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Pi<span style="background: linear-gradient(179deg, #6fe9d0, #129dd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Goal</span></h1>
         <br><br>
 
         <form method="post">
-            <input type="text" placeholder="Username :" name="username"><br>
-            <input type="password" placeholder="Password :" name="password"><br>
-            <input type="password" placeholder="Confirm :" name="confirm"><br>
+            <input class="input" type="text" style="background-image: url('../assets/icons/user.svg');" placeholder="Username :" name="username"><br>
+            <input class="input" type="password" style="background-image: url('../assets/icons/key.svg');" placeholder="Password :" name="password"><br>
+            <input class="input" type="password" style="background-image: url('../assets/icons/key.svg');" placeholder="Confirm :" name="confirm"><br>
 
-            <button type="submit">Create</button>
+
+            <button class="glow_button" type="submit">Create</button>
+            <p id="OrAccount"> or </p>
+            <button onclick="document.location.href = '../index.php'">Login</button>
             <div id="toast-container"></div>
         </form>
 

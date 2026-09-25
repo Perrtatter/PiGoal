@@ -24,8 +24,8 @@
             <button class="glow_button" type="submit">Login</button>
             <div id="toast-container"></div>
         </form>
-        <p id="OrAccount"> ou </p>
-        <button onclick="document.location.href = 'create_account/'" id="create_acc_btn">Create Account</button>
+        <p id="OrAccount"> or </p>
+        <button onclick="document.location.href = 'create_account/'">Create Account</button>
 
         <?php
             // import env

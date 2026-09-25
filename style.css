@@ -143,7 +143,7 @@ button{
 }
 
 
-#create_acc_btn {
+button {
   width: 66vw;
   max-width: 400px;
   padding: 12px 24px;
@@ -151,20 +151,20 @@ button{
   font-size: 15px;
   font-family: inherit;
   font-weight: 500;
-  color: #1f2937;
-  background-color: #f9fafb; 
+  color: #f8f8f8;
+  background-color: #f9fafb15; 
   border: 1px solid #d1d5db;
   border-radius: 8px; 
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,transform 0.2s ease,filter 0.2s ease;
 }
-#create_acc_btn:hover {
+button:hover {
     filter: brightness(1.2);
     transform: translateY(-2px);
     box-shadow: 0 0 30px rgba(101, 113, 114, 0.794);
 }
 
-#create_acc_btn:active {
+button:active {
   background-color: #e5e7eb;
 }
 
@@ -202,7 +202,7 @@ button{
     border-bottom-color: #4b5563;
   }
 
-  #create_acc_btn{background-color: #1f2937;
+  button{background-color: #1f2937;
     border: #4b5563;
     color: #6b7280;
     border: 1px solid; 
@@ -210,7 +210,7 @@ button{
     font-size: 15px;
     margin-top: 0px;
     max-width: 400px;}
-    #create_acc_btn:hover{
+    button:hover{
     color: rgb(183, 180, 180);}
 }
 
@@ -251,7 +251,7 @@ li button{
 
 #point_p{
     font-size: 20px;
-    color:yellow;
+    color:rgb(147, 199, 250);
 }
 
 .glow_button {

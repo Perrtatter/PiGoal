@@ -16,7 +16,8 @@
 <body>
     <div align="center">
         <div id="logo_bg">
-            <img src="../../assets/diamond.png" id="logo">
+            <img src="../../assets/logo.png" id="logo">
+            <div id="logo_glow"></div>
         </div>
     </div>
 
@@ -89,7 +90,7 @@
                 "token"=>"zi3di(ufe31ck433Klls"
             ));
 
-            echo "<button id='go_back_btn' onclick='send_post(" . '"' . "../index.php" . '",' . $data . ")'>Go back</button>";
+            echo "<br><button class='glow_button' onclick='send_post(" . '"' . "../index.php" . '",' . $data . ")'>Go back</button>";
             echo "</ul><br>";
         }
         
