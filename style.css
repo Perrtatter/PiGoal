@@ -214,7 +214,13 @@ body.dark .button:hover {
   color: rgb(183, 180, 180);
 }
 
+body.dark a{
+  color: rgb(188, 185, 185);
+}
 
+a{
+  color:white;
+}
 
 li{
     width: 100%;

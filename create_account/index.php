@@ -82,6 +82,11 @@
                 }
             }
         ?>
+
+        <footer>
+            <p id="OrAccount"> about </p>
+            <a href="https://github.com/Perrtatter/PiGoal">Github</a>
+        </footer>
     </div>
 </body>
 </html>
