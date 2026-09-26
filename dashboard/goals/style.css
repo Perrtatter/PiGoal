@@ -29,3 +29,13 @@ li:hover{
 li img{
     float: left;
 }
+
+
+li p{
+    color:white;;
+}
+
+
+body{
+    background-color: black;
+}
