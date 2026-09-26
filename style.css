@@ -218,8 +218,11 @@ body.dark .button:hover {
 body.dark a{
   color: rgb(188, 185, 185);
 }
+body.dark p{
+  color: rgb(188, 185, 185);
+}
 
-a{
+a,p{
   color:white;
 }
 

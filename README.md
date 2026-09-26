@@ -1,4 +1,4 @@
-# Pigoal
+# Pigoal v2.beta.12
  
 ## Run server 
 Use Vscode `PHP Server`

@@ -99,6 +99,7 @@
         <footer>
             <p id="OrAccount"> about </p>
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
+            <p>Version : <strong>2.beta.12</strong></p>
         </footer>
     </div>
 </body>
