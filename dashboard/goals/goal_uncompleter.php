@@ -36,24 +36,23 @@
 
         // 6. Free the result memory
         pg_free_result($result);
-        
 
+    
         // complete or not category
         // execute
         // 1. Parameterized SELECT Query (Replaced variables with $1 and $2)
-        $query_category = 'SELECT count(g.is_complete) AS total_count
+        $query_category = 'SELECT count(CASE WHEN g.is_complete = false THEN 1 END) AS complete_count,count(g.*) AS total_count
                         FROM public.goal g 
                         INNER JOIN category c ON g.id = c.goal_id 
                         WHERE c.nom = $1
-                            AND c.user_id = (SELECT id FROM "user" WHERE username = $2) 
-                            AND g.is_complete = true;';
+                            AND c.user_id = (SELECT id FROM "user" WHERE username = $2);';
 
         // Execute directly with parameters in a single step
         $result = pg_query_params($dbconn, $query_category, array($category, $username));
         $row = pg_fetch_assoc($result);
 
         // Using the explicit alias "total_count" defined in the SELECT statement
-        if ((int)$row["total_count"] != 4) {
+        if ((int)$row["complete_count"] != (int)$row["total_count"]) {
             
             // 2. Parameterized UPDATE Query (Replaced variables with $1 and $2)
             $query_update = 'UPDATE category 
@@ -63,7 +62,7 @@
 
             // Execute the update query safely
             $update_result = pg_query_params($dbconn, $query_update, array($category, $username));
-        } 
+        }
 
         // 3. Go back to page (Cleaned up URL parameter encoding)
         $data = json_encode(array(

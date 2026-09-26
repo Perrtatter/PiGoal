@@ -377,3 +377,7 @@ body #theme_switcher{
   background-color: #fff;
   border: #4b5563;
 }
+
+a{
+  color: white;
+}
