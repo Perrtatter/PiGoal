@@ -78,9 +78,11 @@
                     echo "<li  class='goal_type_" . $row['type'] . "' onclick='send_post(" . '"' . "goal_completer.php" . '",' . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
                 }
             }
-            echo "</ul><br>";
+            echo "</ul>";
         }
     ?>
+
+    <button class="glow_button">+</button><br>
 
         <footer>
             <p id="OrAccount"> about </p>
