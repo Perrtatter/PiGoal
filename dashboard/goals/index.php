@@ -12,9 +12,14 @@
     <script src="../../compenents/toast/toast.js"></script>
     <script src="../../compenents/send_post/send_post.js"></script>
     <script src="script.js"></script>
+    <script type="module">
+        import { CreateThemeSwitcher } from "/compenents/theme_switcher/create_theme_switcher.js"
+        CreateThemeSwitcher()
+    </script>
 </head>
 <body>
     <div align="center">
+         <div id="theme_switcher_div"></div>
         <div id="logo_bg">
             <img src="../../assets/logo.png" id="logo">
             <div id="logo_glow"></div>
@@ -90,7 +95,7 @@
                 "token"=>"zi3di(ufe31ck433Klls"
             ));
 
-            echo "<br><button class='glow_button' onclick='send_post(" . '"' . "../index.php" . '",' . $data . ")'>Go back</button>";
+            echo "<br><button class='glow_button' style='margin-left:-35px;' onclick='send_post(" . '"' . "../index.php" . '",' . $data . ")'>Go back</button>";
             echo "</ul><br>";
         }
         

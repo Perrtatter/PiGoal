@@ -12,9 +12,15 @@
     <link rel="stylesheet" href="../compenents/toast/toast.css">
     <script src="../compenents/toast/toast.js"></script>
     <script src="../compenents/send_post/send_post.js"></script>
+
+    <script type="module">
+        import { CreateThemeSwitcher } from "/compenents/theme_switcher/create_theme_switcher.js"
+        CreateThemeSwitcher()
+    </script>
 </head>
 <body>
     <div align="center">
+         <div id="theme_switcher_div"></div>
         <div id="logo_bg" style="">
             <img src="/assets/logo.png" id="logo">
         <div id="logo_glow"></div>
@@ -42,7 +48,7 @@
 
         else{
             $username = $_POST["user"];
-            echo "<h1 id='hello_h1'>Hello $username</h1>";
+            echo "<h1 style='margin-top:10px; font-size:40px; background: linear-gradient(182deg, #ffffff, #b4b4b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;' id='hello_h1'>Hello <span style='background: linear-gradient(179deg, #6fe9d0, #129dd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>$username</span></h1>";
         }
 
         // fetch all category for user 
@@ -102,7 +108,7 @@
 
         echo '<button class="glow_button" onclick="createCategory()">+</button>';
         echo '<p id="OrAccount"> or </p>';
-        echo '<button onclick="document.location.href = '. "'../index.php'" .'">Logout</button>';
+        echo '<button class="button" onclick="document.location.href = '. "'../index.php'" .'">Logout</button>';
 
         echo "<p id='point_p'>";
         echo $row["nbr_point"];

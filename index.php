@@ -12,9 +12,16 @@
     <script src="compenents/send_post/send_post.js"></script>
 
     <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+
+    <script type="module">
+        import { CreateThemeSwitcher } from "./compenents/theme_switcher/create_theme_switcher.js"
+        CreateThemeSwitcher()
+    </script>
+
 </head>
 <body>
     <div align="center">
+        <div id="theme_switcher_div"></div>
         <img src="assets/logo.png" id="logo">
         <div id="logo_glow"></div>
         <h1 style="margin-top:-10px; font-size:70px; background: linear-gradient(182deg, #ffffff, #b4b4b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Pi<span style="background: linear-gradient(179deg, #6fe9d0, #129dd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Goal</span></h1>
@@ -25,7 +32,7 @@
             <div id="toast-container"></div>
         </form>
         <p id="OrAccount"> or </p>
-        <button onclick="document.location.href = 'create_account/'">Create Account</button>
+        <button onclick="document.location.href = 'create_account/'" class="button">Create Account</button>
 
         <?php
             // import env
