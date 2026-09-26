@@ -113,12 +113,10 @@
 
         $row = pg_fetch_assoc($result);
 
-        echo '<button class="glow_button" onclick="createCategory()">+</button>';
-        echo '<p id="OrAccount"> or </p>';
-        echo '<button class="button" onclick="document.location.href = '. "'../index.php'" .'">Logout</button>';
 
         echo "<p id='point_p'>";
         echo $row["nbr_point"];
+        echo "<img id='pointImage' src='/assets/diamond.png'";
         echo "</p>";
 
         // 6. Free the result memory
