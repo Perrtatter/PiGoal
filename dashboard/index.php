@@ -13,14 +13,21 @@
     <script src="../compenents/toast/toast.js"></script>
     <script src="../compenents/send_post/send_post.js"></script>
 
-    <script type="module">
+    <script type="module" defer>
         import { CreateThemeSwitcher } from "/compenents/theme_switcher/create_theme_switcher.js"
+        import { CreateGoBack } from "/compenents/go_back/create_go_back.js"
         CreateThemeSwitcher()
+        CreateGoBack("/")
     </script>
 </head>
 <body>
     <div align="center">
-         <div id="theme_switcher_div"></div>
+        <div class="header">
+            <div class="flex-container-invisible">
+                <div id="go_back_div"></div>
+                <div id="theme_switcher_div"></div>
+            </div>
+        </div>
         <div id="logo_bg" style="">
             <img src="/assets/logo.png" id="logo">
         <div id="logo_glow"></div>
@@ -56,7 +63,7 @@
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        $query = "SELECT c.nom, c.is_complete, COUNT(CASE WHEN g.is_complete = true THEN 1 END) AS nbr_g_complete FROM public.category c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete;";
+        $query = "SELECT c.nom, c.is_complete, COUNT(CASE WHEN g.is_complete = true THEN 1 END) AS nbr_g_complete FROM public.category c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete ORDER BY nbr_g_complete;";
         $result = pg_query_params($dbconn, $query, [$username]);
 
         if ($result === false) {

@@ -12,14 +12,21 @@
     <script src="../../compenents/toast/toast.js"></script>
     <script src="../../compenents/send_post/send_post.js"></script>
     <script src="script.js"></script>
-    <script type="module">
+    <script type="module" defer>
         import { CreateThemeSwitcher } from "/compenents/theme_switcher/create_theme_switcher.js"
+        import { CreateGoBack } from "/compenents/go_back/create_go_back.js"
         CreateThemeSwitcher()
+        CreateGoBack("/dashboard")
     </script>
 </head>
 <body>
     <div align="center">
-         <div id="theme_switcher_div"></div>
+         <div class="header">
+            <div class="flex-container-invisible">
+                <div id="go_back_div"></div>
+                <div id="theme_switcher_div"></div>
+            </div>
+        </div>
         <div id="logo_bg">
             <img src="../../assets/logo.png" id="logo">
             <div id="logo_glow"></div>
