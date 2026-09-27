@@ -95,8 +95,8 @@
             }
         ?>
 
-        <footer>
-            <!--<p style="pointer-events: none;" id="OrAccount"> about </p>-->
+        <footer style="background-color: rgba(31, 41, 55, 1.0);">
+            <p style="pointer-events: none;" id="OrAccount"> about </p>
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
             <p>Version : <strong>2.beta.14</strong></p>
         </footer>
