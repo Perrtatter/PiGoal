@@ -61,7 +61,7 @@
                 4=> "../../assets/copper.png"
             ];
 
-            echo "<ul style='margin-left:-5vw;'>";
+            echo "<ul style='margin-left:-3vw;'>";
             
             while ($row = pg_fetch_assoc($result)) {
                 $data = json_encode(array(
@@ -86,7 +86,7 @@
     <button class="glow_button">+</button><br>
 
         <footer>
-            <p id="OrAccount"> about </p>
+            <!--<p style="pointer-events: none;" id="OrAccount"> about </p>-->
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
         </footer>
     </div>

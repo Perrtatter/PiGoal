@@ -96,7 +96,7 @@
         ?>
 
         <footer>
-            <p id="OrAccount"> about </p>
+            <!--<p style="pointer-events: none;" id="OrAccount"> about </p>-->
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
             <p>Version : <strong>2.beta.14</strong></p>
         </footer>
