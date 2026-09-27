@@ -61,7 +61,7 @@
                 4=> "../../assets/copper.png"
             ];
 
-            echo "<ul>";
+            echo "<ul style='margin-left:-5vw;'>";
             
             while ($row = pg_fetch_assoc($result)) {
                 $data = json_encode(array(
@@ -71,12 +71,13 @@
                     "goal_type"=>$row["type"]
                 ));
 
-                if ($row['is_complete'] == "t"){
-                    echo "<li class='complete' onclick='send_post(" . '"' . "goal_uncompleter.php" . '",' . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
+                
+                if ($row['is_complete'] == "t") {
+                    echo "<li><div id='background' class='complete type" . $row['type'] . "' onclick='send_post(\"goal_uncompleter.php\", " . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']] . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></div></li>";
+                } else {
+                    echo "<li><div id='background' class='type" . $row['type'] . "' onclick='send_post(\"goal_completer.php\", " . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']] . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></div></li>";
                 }
-                else{
-                    echo "<li onclick='send_post(" . '"' . "goal_completer.php" . '",' . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']]  . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></li>";
-                }
+
             }
             echo "</ul><br>";
         }

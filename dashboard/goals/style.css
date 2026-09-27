@@ -1,7 +1,7 @@
 @import url(../../style.css);
 
 li{
-    background-color: grey;
+    background-color: transparent;
     margin-top: 20px;
     padding: 2.5px;
     margin-left: -30px;
@@ -12,9 +12,15 @@ li{
     text-align: center;
 }
 
-li:hover{
-    background-color: rgb(153, 151, 151);
-    
+#background{
+background-color: red;
+border-radius: 96px;
+top: clamp(-15px, -1.5vw, -15px);
+left: clamp(10px, 1.5vw, 20px);
+right: clamp(-15px, -1.5vw, -10px);
+bottom: clamp(-15px, -1.5vw, -10px);
+width: clamp(91px, 62.6vw, 478px);
+height: 74px;
 }
 
 .complete{
@@ -25,7 +31,64 @@ li:hover{
     background-color: rgb(5, 172, 5);
 }
 
-
 li img{
     float: left;
+}
+
+#background.type1 { background: rgb(2, 40, 50); }
+#background.type2 { background: rgb(69, 60, 26); }
+#background.type3 { background: rgb(79, 79, 80); }
+#background.type4 { background: rgb(43, 31, 28); }
+
+#background.type1.complete { background: rgb(10, 48, 42); } 
+#background.type2.complete { background: rgb(48, 55, 24); } 
+#background.type3.complete { background: rgb(50, 60, 50); } 
+#background.type4.complete { background: rgb(35, 42, 26); } 
+
+#background.type1:hover { background: rgb(6, 93, 117); }
+#background.type2:hover { background: rgb(142, 122, 53); }
+#background.type3:hover { background: rgb(132, 132, 134); }
+#background.type4:hover { background: rgb(107, 72, 64); }
+
+#background.type1.complete:hover { background: rgb(15, 110, 85); }
+#background.type2.complete:hover { background: rgb(85, 120, 40); }
+#background.type3.complete:hover { background: rgb(90, 115, 90); }
+#background.type4.complete:hover { background: rgb(75, 95, 50); }
+
+
+#background.type1::after,
+#background.type2::after,
+#background.type3::after,
+#background.type4::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 0px;
+  width: 66vw;
+  max-width: 500px;
+  opacity: 0.7;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#background.type1::after {
+  box-shadow: 0 0 100px 30px rgba(23, 177, 217, 0.66); 
+}
+
+#background.type2::after {
+  box-shadow: 0 0 100px 30px rgba(222, 179, 4, 0.66);
+}
+
+#background.type3::after {
+  box-shadow: 0 0 100px 30px rgba(114, 114, 114, 0.66);
+}
+
+#background.type4::after {
+  box-shadow: 0 0 100px 30px rgba(180, 90, 0, 0.66);
+}
+
+#background.complete::after{
+    box-shadow: 0 0 100px 30px rgba(45, 180, 0, 0.66);
 }
