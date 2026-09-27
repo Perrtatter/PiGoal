@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="compenents/toast/toast.css">
     <script src="compenents/toast/toast.js"></script>
-    <script src="compenents/get_env/get_env.js"></script>
     <script src="compenents/send_post/send_post.js"></script>
 
     <link rel="shortcut icon" href="assets/logo.png" type="image/png">
@@ -99,6 +98,7 @@
         <footer>
             <p id="OrAccount"> about </p>
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
+            <p>Version : <strong>2.beta.14</strong></p>
         </footer>
     </div>
 </body>

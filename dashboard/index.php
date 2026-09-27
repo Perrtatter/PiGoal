@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pigoal | Dashboard</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="/style.css">
     <link rel="shortcut icon" href="../assets/diamond.png" type="image/png">
 
-
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="../compenents/toast/toast.css">
     <script src="../compenents/toast/toast.js"></script>
     <script src="../compenents/send_post/send_post.js"></script>
@@ -73,7 +71,7 @@
 
         // 4. Check if any categories were found
         if (pg_num_rows($result) === 0) {
-            echo "No categories found for user $username.<br>";
+            echo "<br>No categories found for user $username.<br>";
         } 
         
         else {
@@ -104,7 +102,7 @@
 
             }
             
-            echo "</ul><br>";
+            echo "</ul>";
         }
 
         // fetch coins nbr 
@@ -113,7 +111,18 @@
 
         $row = pg_fetch_assoc($result);
 
+        // put button +
+        // gen data
+        $data = json_encode(array(
+            "token"=>"zi3di(ufe31ck433Klls",
+            "user"=>$username
+        ));
 
+        echo "<button class='glow_button' onclick='send_post(" . '"add_category/index.php",' . $data . ")'>+</button><br>";
+    ?>
+
+    <?php
+        // dispay coins
         echo "<p id='point_p'>";
         echo $row["nbr_point"];
         echo "<img id='pointImage' src='/assets/diamond.png'";

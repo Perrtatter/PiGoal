@@ -51,7 +51,7 @@
         $result = pg_query($dbconn, $query);
 
         if (pg_num_rows($result) === 0) {
-            echo "No goals found for category $category.";
+            echo "No goals found for category $category.<br>";
         } 
         else {
             $goal_data_dict = [
@@ -79,9 +79,11 @@
                 }
 
             }
-            echo "</ul><br>";
+            echo "</ul>";
         }
     ?>
+
+    <button class="glow_button">+</button><br>
 
         <footer>
             <p id="OrAccount"> about </p>

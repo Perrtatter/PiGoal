@@ -70,19 +70,29 @@
                     $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
                     $dbconn = pg_connect($connection_string);
 
-                    // insert
-                    $password_hash = hash("sha256",$password);
-
-                    $query = "INSERT INTO \"user\"(username, password_hash) VALUES ('$username', '$password_hash');";
+                    // if alredy in db 
+                    $query = "SELECT username AS lower_username FROM \"user\" WHERE LOWER(username) = lower('$username');";
                     $result = pg_query($dbconn, $query);
 
-                    // redirect
-                    echo "<script>document.location.href = '../index.php';</script>";
-    
+                    if ($result && pg_num_rows($result) > 0) {
+                        echo "<script>toast('User already in exists.', 'error')</script>";
+                    }
+
+                    else{
+                        // insert
+                        $password_hash = hash("sha256",$password);
+
+                        $query = "INSERT INTO \"user\"(username, password_hash) VALUES ('$username', '$password_hash');";
+                        $result = pg_query($dbconn, $query);
+
+                        // redirect
+                        echo "<script>document.location.href = '../index.php';</script>";
+
+                    }
                 }
             }
         ?>
-
+        <br><br>
         <footer>
             <p id="OrAccount"> about </p>
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>

@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
     <script src="../../compenents/send_post/send_post.js"></script>
-<body style="background-color:rgb(44,44,44);">
+    <link rel="stylesheet" href="../../style.css">
+<body>
+    <div align="center">
+        <img src="../../assets/loading.gif">
+        <p>Loading ...</p>
+    </div>
     <?php
         // import env
         require_once __DIR__ . '/../../compenents/get_env/get_env.php';
