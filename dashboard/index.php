@@ -71,7 +71,7 @@
 
         // 4. Check if any categories were found
         if (pg_num_rows($result) === 0) {
-            echo "No categories found for user $username.<br>";
+            echo "<br>No categories found for user $username.<br>";
         } 
         
         else {

@@ -1,5 +1,18 @@
-# Pigoal v2.beta.13
+# Pigoal v2.beta.14
+<br>
  
+## Requirements
+For `Postgres`
+```
+composer require tsubasa/laravel-postgres
+```
+
+For `PHPMailer`
+```
+composer require phpmailer/phpmailer
+```
+<br>
+
 ## Run server 
 Use Vscode `PHP Server`
 
@@ -9,9 +22,12 @@ Install PHP in local ( enable `pqsl` extension ) and run PHP Server :
 ```
 php -S locahost:3000
 ```
+<br>
 
 ## Go 
 HTTPS URL  : https://www.pigoal.ch
+
+<br>
 
 ## Feature
  - Login
@@ -21,6 +37,8 @@ HTTPS URL  : https://www.pigoal.ch
  - Uncomplete Goal
  - Complete category
  - Points per user
+
+<br>
  
 ## Update 
 Run this on your linux shell
