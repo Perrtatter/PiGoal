@@ -1,4 +1,4 @@
-# Pigoal v2.beta.14
+# Pigoal v2.beta.15
 <br>
  
 ## Requirements
@@ -57,4 +57,7 @@ sudo mv temp_dir/* .
 
 # remove temps dir
 sudo rm -rf tmp_dir
+
+# update apache
+sudo systemctl reload apache2
 ```

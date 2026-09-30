@@ -85,10 +85,11 @@
 
     <button class="glow_button">+</button><br>
 
-        <footer>
-            <p id="OrAccount"> about </p>
-            <a href="https://github.com/Perrtatter/PiGoal">Github</a>
-        </footer>
+    <br style="margin-top:30px;">
+    <footer>
+        <p id="OrAccount"> about </p>
+        <a href="https://github.com/Perrtatter/PiGoal">Github</a>
+    </footer>
     </div>
     <script type="module">
         import { CreateThemeSwitcher } from "../../compenents/theme_switcher/create_theme_switcher.js";
