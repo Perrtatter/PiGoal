@@ -68,7 +68,7 @@
     ?>
 
     <footer>
-            <p id="OrAccount"> about </p>
+            <!--<p style="pointer-events: none;" id="OrAccount"> about </p>-->
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
     </footer>
     </div>

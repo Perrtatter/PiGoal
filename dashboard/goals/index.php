@@ -61,7 +61,7 @@
                 4=> "../../assets/copper.png"
             ];
 
-            echo "<ul style='margin-left:-5vw;'>";
+            echo "<ul style='margin-left:-3vw;'>";
             
             while ($row = pg_fetch_assoc($result)) {
                 $data = json_encode(array(
@@ -85,11 +85,10 @@
 
     <button class="glow_button">+</button><br>
 
-    <br style="margin-top:30px;">
-    <footer>
-        <p id="OrAccount"> about </p>
-        <a href="https://github.com/Perrtatter/PiGoal">Github</a>
-    </footer>
+        <footer>
+            <p style="pointer-events: none;" id="OrAccount"> about </p>
+            <a href="https://github.com/Perrtatter/PiGoal">Github</a>
+        </footer>
     </div>
     <script type="module">
         import { CreateThemeSwitcher } from "../../compenents/theme_switcher/create_theme_switcher.js";
