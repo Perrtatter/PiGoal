@@ -18,10 +18,11 @@ Use Vscode `PHP Server`
 
 > or 
 
-Install PHP in local ( enable `pqsl` extension ) and run PHP Server :
+Install PHP locally with the `pgsql` extension enabled, then run the built-in PHP server from the project root:
 ```
-php -S locahost:3000
+php -S localhost:3000
 ```
+Open `http://localhost:3000` in your browser. The local `.env.json` file must contain the database connection settings.
 <br>
 
 ## Go 

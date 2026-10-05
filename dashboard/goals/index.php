@@ -38,20 +38,25 @@
         $db_username = get_env("../../","username");
         $db_name = get_env("../../","dbname");
 
-        $category = $_POST["category"];
-        $username = $_POST["username"]; // $username est enfin défini ici !
-        echo "<h1 id='hello_h1'>$category</h1>";
+        $category = (string)($_POST["category"] ?? "");
+        $username = (string)($_POST["username"] ?? "");
+        echo "<h1 id='hello_h1'>" . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</h1>";
 
         // connect
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        $query = "SELECT g.id,g.nom,g.type,g.is_complete FROM public.goal g inner join category c on g.id = c.goal_id where c.nom = '$category' and c.user_id = ( select id from \"user\" where username = '$username' ) order by type asc";
+        $query = "SELECT g.id, g.nom, g.type, g.is_complete, g.one_time, g.step
+            FROM public.goal g
+            INNER JOIN public.categorie c ON g.id = c.goal_id
+            WHERE c.nom = $1
+                AND c.user_id = (SELECT id FROM public.\"user\" WHERE username = $2)
+            ORDER BY g.type ASC";
 
-        $result = pg_query($dbconn, $query);
+        $result = pg_query_params($dbconn, $query, array($category, $username));
 
         if (pg_num_rows($result) === 0) {
-            echo "No goals found for category $category.<br>";
+            echo "No goals found for category " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . ".<br>";
         } 
         else {
             $goal_data_dict = [
@@ -64,18 +69,24 @@
             echo "<ul style='margin-left:-3vw;'>";
             
             while ($row = pg_fetch_assoc($result)) {
-                $data = json_encode(array(
-                    "username"=>$username,
-                    "category"=>$category,
-                    "goal_id"=>$row["id"],
-                    "goal_type"=>$row["type"]
-                ));
+                $is_complete = $row['is_complete'] === "t";
+                $classes = 'background ' . ($is_complete ? 'complete ' : '') . 'type' . (int)$row['type'];
+                $data = array(
+                    "username" => $username,
+                    "category" => $category,
+                    "goal_id" => (int)$row["id"],
+                    "goal_type" => (int)$row["type"],
+                    "is_complete" => $is_complete,
+                );
+                $data_json = htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8');
+                $goal_name = htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8');
+                $goal_image = $goal_data_dict[(int)$row['type']];
 
-                
-                if ($row['is_complete'] == "t") {
-                    echo "<li><div id='background' class='complete type" . $row['type'] . "' onclick='send_post(\"goal_uncompleter.php\", " . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']] . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></div></li>";
+                if ($row['one_time'] === "t") {
+                    $action = $is_complete ? 'goal_uncompleter.php' : 'goal_completer.php';
+                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "' onclick='send_post(\"$action\", $data_json)'><img src='$goal_image' width=50><p>$goal_name</p></div></li>";
                 } else {
-                    echo "<li><div id='background' class='type" . $row['type'] . "' onclick='send_post(\"goal_completer.php\", " . $data . ")' id='goal_li_" . $row['id'] . "'><img src='" . $goal_data_dict[$row['type']] . "' width=50><p>" . htmlspecialchars($row['nom']) . "</p></div></li>";
+                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "'><img src='$goal_image' width=50><p>$goal_name</p><input type='range' min=0 max=3 step=1 value='" . (int)$row['step'] . "' data-goal='$data_json' onchange='updateGoalStep(this)'></div></li>";
                 }
 
             }
@@ -96,7 +107,7 @@
         
         CreateThemeSwitcher();
         
-        const goBackData = <?php echo json_encode(array("user" => $username, "token" => "zi3di(ufe31ck433Klls")); ?>;
+        const goBackData = <?php echo json_encode(array("user" => $username, "token" => "zi3di(ufe31ck433Klls"), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
         CreateGoBack("../index.php", goBackData);
     </script>
 </body>

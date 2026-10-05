@@ -383,7 +383,7 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #ffffff;
+    background: rgb(27, 15, 1);
     padding: 10px 0;
     z-index: 1000;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); 
@@ -433,9 +433,9 @@ body.dark footer{
 }
 
 body footer{
-  background: white;
+  background: rgb(27, 15, 1);
 }
 
 body footer a{
-   color: #1f2937; 
+   color: #eef0f3; 
 }

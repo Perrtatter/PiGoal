@@ -61,7 +61,7 @@
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        $query = "SELECT c.nom, c.is_complete, COUNT(CASE WHEN g.is_complete = true THEN 1 END) AS nbr_g_complete, count(g.id) as nbr_g FROM public.category c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete order by nbr_g_complete desc;";
+        $query = "SELECT c.nom, c.is_complete, COUNT(CASE WHEN g.is_complete = true THEN 1 END) AS nbr_g_complete, count(g.id) as nbr_g FROM public.categorie c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN public.goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete order by nbr_g_complete desc;";
         $result = pg_query_params($dbconn, $query, [$username]);
 
         if ($result === false) {
@@ -106,8 +106,8 @@
         }
 
         // fetch coins nbr 
-        $query = 'select nbr_point from "user" where username = ' . "'" . $username . "';";
-        $result = pg_query($dbconn, $query);
+        $query = 'SELECT nbr_point FROM public."user" WHERE username = $1';
+        $result = pg_query_params($dbconn, $query, array($username));
 
         $row = pg_fetch_assoc($result);
 

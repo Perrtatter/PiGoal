@@ -6,6 +6,7 @@
     <script src="script.js"></script>
     <script src="../../compenents/send_post/send_post.js"></script>
     <link rel="stylesheet" href="../../style.css">
+</head>
 <body>
     <div align="center">
         <img src="../../assets/loading.gif">
@@ -21,62 +22,42 @@
         $db_name = get_env("../../","dbname");
 
         // get params
-        $goal_id = $_POST["goal_id"];
-        $username = $_POST["username"];
-        $category = $_POST["category"];
-        $goal_type = $_POST["goal_type"];
+        $goal_id = (int)($_POST["goal_id"] ?? 0);
+        $username = (string)($_POST["username"] ?? "");
+        $category = (string)($_POST["category"] ?? "");
 
         // connect
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        // complete goal in db
-        $query_complete = "update goal set is_complete=false where id=" . $goal_id;
-        $result = pg_query($dbconn, $query_complete);
+        $result = pg_query_params(
+            $dbconn,
+            'UPDATE public.goal SET is_complete = false WHERE id = $1 AND is_complete = true RETURNING type',
+            array($goal_id)
+        );
 
-        // add point 
-        //$query = 'update "user" set nbr_point=nbr_point+' . $goal_point_dict[$goal_type] . " where username='" . $username . "';";
-        $query_point = 'update "user" set nbr_point=nbr_point-' . 125-($goal_type*25) . " where username='" . $username . "';";
-        $result = pg_query($dbconn, $query_point);
-
-        // 6. Free the result memory
-        pg_free_result($result);
-
-    
-        // complete or not category
-        // execute
-        // 1. Parameterized SELECT Query (Replaced variables with $1 and $2)
-        $query_category = 'SELECT count(CASE WHEN g.is_complete = false THEN 1 END) AS complete_count,count(g.*) AS total_count
-                        FROM public.goal g 
-                        INNER JOIN category c ON g.id = c.goal_id 
-                        WHERE c.nom = $1
-                            AND c.user_id = (SELECT id FROM "user" WHERE username = $2);';
-
-        // Execute directly with parameters in a single step
-        $result = pg_query_params($dbconn, $query_category, array($category, $username));
-        $row = pg_fetch_assoc($result);
-
-        // Using the explicit alias "total_count" defined in the SELECT statement
-        if ((int)$row["complete_count"] != (int)$row["total_count"]) {
-            
-            // 2. Parameterized UPDATE Query (Replaced variables with $1 and $2)
-            $query_update = 'UPDATE category 
-                            SET is_complete = false 
-                            WHERE nom = $1 
-                            AND user_id = (SELECT id FROM "user" WHERE username = $2);';
-
-            // Execute the update query safely
-            $update_result = pg_query_params($dbconn, $query_update, array($category, $username));
+        if ($result !== false && pg_affected_rows($result) > 0) {
+            $goal = pg_fetch_assoc($result);
+            $points = 125 - ((int)$goal['type'] * 25);
+            pg_query_params(
+                $dbconn,
+                'UPDATE public."user" SET nbr_point = nbr_point - $1 WHERE username = $2',
+                array($points, $username)
+            );
+            pg_query_params(
+                $dbconn,
+                'UPDATE public.categorie SET is_complete = false WHERE nom = $1 AND user_id = (SELECT id FROM public."user" WHERE username = $2)',
+                array($category, $username)
+            );
         }
 
         // 3. Go back to page (Cleaned up URL parameter encoding)
-        $data = json_encode(array(
-            "category"=>$category,
-            "username"=>$username
-        ));
+        $data = array(
+            "category" => $category,
+            "username" => $username
+        );
 
-                    
-        echo "<script>send_post('index.php',$data)</script>";        
+        echo '<script>send_post("index.php", ' . json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) . ');</script>';
     ?>
 
 </body>
