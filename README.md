@@ -1,4 +1,4 @@
-# Pigoal v2.beta.15
+# Pigoal v2.17
 <br>
  
 ## Requirements
@@ -38,6 +38,10 @@ HTTPS URL  : https://www.pigoal.ch
  - Uncomplete Goal
  - Complete category
  - Points per user
+ - Leaderboard 
+ - Steps
+ - Create category
+ - Create goals
 
 <br>
  

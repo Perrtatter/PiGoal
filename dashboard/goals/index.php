@@ -59,7 +59,7 @@
         $result = pg_query_params($dbconn, $query, array($category, $username));
 
         if (pg_num_rows($result) === 0) {
-            echo "<p>Cette catégorie est vide. Ajoute ton premier objectif !</p>";
+            echo "<p>No categories found for $category</p>";
         } 
         else {
             $goal_data_dict = [

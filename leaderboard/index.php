@@ -10,20 +10,12 @@
     <script src="../compenents/send_post/send_post.js"></script>
 
     <link rel="shortcut icon" href="../assets/logo.png" type="image/png">
-
-    <script type="module" defer>
-        import { CreateThemeSwitcher } from "/compenents/theme_switcher/create_theme_switcher.js"
-        import { CreateGoBack } from "/compenents/go_back/create_go_back.js"
-        CreateThemeSwitcher()
-        CreateGoBack()
-    </script>
-
 </head>
 <body>
     <div align="center">
         <div class="header">
             <div class="flex-container-invisible">
-                <div id="go_back_div" style="opacity:0;"></div>
+                <div id="go_back_div"></div>
                 <div id="theme_switcher_div"></div>
             </div>
         </div>
@@ -38,6 +30,9 @@
             $db_password = get_env("../","password");
             $db_username = get_env("../","username");
             $db_name = get_env("../","dbname");
+
+            $username = $_POST["user"];
+            $token = $_POST["token"];
             
             
             // connect
@@ -74,5 +69,14 @@
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
         </footer>
     </div>
+    <script type="module">
+            import { CreateThemeSwitcher } from "../../compenents/theme_switcher/create_theme_switcher.js";
+            import { CreateGoBack } from "../../compenents/go_back/create_go_back.js";
+            
+            CreateThemeSwitcher();
+            
+            const goBackData = <?php echo json_encode(array("user" => $username, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+            CreateGoBack("../dashboard/index.php", goBackData);
+    </script>
 </body>
 </html>

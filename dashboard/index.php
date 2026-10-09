@@ -129,6 +129,17 @@
     ?>
 
         <footer>
+            <!-- leaderboard link -->
+            <?php
+                // gen data
+                $data = json_encode(array(
+                    "token"=>"zi3di(ufe31ck433Klls",
+                    "user"=>$username
+                ));
+
+                echo "<button id='leaderboard_a' onclick='send_post(" . '"../leaderboard/index.php",' . $data . ")'>Leaderboard</button>";
+            ?>
+
             <p style="pointer-events: none;" id="OrAccount"> about </p>
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
         </footer>

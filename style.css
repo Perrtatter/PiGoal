@@ -439,3 +439,12 @@ body footer{
 body footer a{
    color: #eef0f3; 
 }
+
+#leaderboard_a{
+  color:white;
+  border:none;
+  background-color: rgba(31, 41, 55, 1.0);
+  font-size: 15px;
+  cursor:pointer;
+  text-decoration: underline;
+}
