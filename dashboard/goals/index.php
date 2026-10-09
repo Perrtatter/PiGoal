@@ -38,8 +38,8 @@
         $db_username = get_env("../../","username");
         $db_name = get_env("../../","dbname");
 
-        $category = (string)($_POST["category"] ?? "");
-        $username = (string)($_POST["username"] ?? "");
+        $category = (string)($_POST["category"]);
+        $username = (string)($_POST["username"]);
         $token = (string)($_POST["token"] ?? "zi3di(ufe31ck433Klls");
         echo "<h1 id='hello_h1'>" . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</h1>";
 
