@@ -52,7 +52,7 @@
             while ($row = pg_fetch_assoc($result)) { 
                 if ($i < 4){
                     $i = $i +1;
-                    echo "<li id='type" . $i . "'>" . $row['username'] . " (<span style='color:rgb(147, 199, 250);font-weight:bold;'>". $row['nbr_point']. "</span>)</li><br>";
+                    echo "<li class='background type" . $i . "'>" . $row['username'] . " (<span style='color:rgb(147, 199, 250);font-weight:bold;'>". $row['nbr_point']. "</span>)</li><br>";
                 }
 
                 else{

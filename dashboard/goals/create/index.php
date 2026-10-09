@@ -138,10 +138,8 @@
                 <option value="4">Copper</option>
             </select><br><br>
 
-            <label style="display:flex; align-items:center; gap:10px; color:#fff;">
-                <input type="checkbox" name="one_time">
-                One-time goal
-            </label><br><br>
+            <input type="checkbox" name="one_time">One-time goal
+            <br><br>
 
             <button class="glow_button" type="submit">Add goal</button>
         </form>
