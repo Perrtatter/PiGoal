@@ -40,6 +40,7 @@
 
         $category = (string)($_POST["category"] ?? "");
         $username = (string)($_POST["username"] ?? "");
+        $token = (string)($_POST["token"] ?? "zi3di(ufe31ck433Klls");
         echo "<h1 id='hello_h1'>" . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</h1>";
 
         // connect
@@ -51,12 +52,14 @@
             INNER JOIN public.categorie c ON g.id = c.goal_id
             WHERE c.nom = $1
                 AND c.user_id = (SELECT id FROM public.\"user\" WHERE username = $2)
+                AND g.id <> 0
+                AND g.type <> 0
             ORDER BY g.type ASC";
 
         $result = pg_query_params($dbconn, $query, array($category, $username));
 
         if (pg_num_rows($result) === 0) {
-            echo "No goals found for category " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . ".<br>";
+            echo "<p>Cette catégorie est vide. Ajoute ton premier objectif !</p>";
         } 
         else {
             $goal_data_dict = [
@@ -79,14 +82,21 @@
                     "is_complete" => $is_complete,
                 );
                 $data_json = htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8');
+                $delete_data_json = htmlspecialchars(json_encode([
+                    "username" => $username,
+                    "category" => $category,
+                    "goal_id" => (int)$row["id"],
+                    "token" => $token,
+                ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
+                $delete_button = '<button class="del_cal_btn goal-delete" type="button" title="Supprimer cet objectif" aria-label="Supprimer cet objectif" onclick=\'event.stopPropagation(); if (confirm("Supprimer cet objectif ?")) send_post("delete_goal.php", ' . $delete_data_json . ')\'>🗑️</button>';
                 $goal_name = htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8');
                 $goal_image = $goal_data_dict[(int)$row['type']];
 
                 if ($row['one_time'] === "t") {
                     $action = $is_complete ? 'goal_uncompleter.php' : 'goal_completer.php';
-                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "' onclick='send_post(\"$action\", $data_json)'><img src='$goal_image' width=50><p>$goal_name</p></div></li>";
+                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "' onclick='send_post(\"$action\", $data_json)'><img src='$goal_image' width=50><p>$goal_name</p>$delete_button</div></li>";
                 } else {
-                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "'><img src='$goal_image' width=50><p>$goal_name</p><input type='range' min=0 max=3 step=1 value='" . (int)$row['step'] . "' data-goal='$data_json' onchange='updateGoalStep(this)'></div></li>";
+                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "'><img src='$goal_image' width=50><p>$goal_name</p><input type='range' min=0 max=3 step=1 value='" . (int)$row['step'] . "' data-goal='$data_json' onchange='updateGoalStep(this)'>$delete_button</div></li>";
                 }
 
             }
@@ -94,7 +104,7 @@
         }
     ?>
 
-    <button class="glow_button">+</button><br>
+    <button class="glow_button" onclick='send_post("create/index.php", <?php echo json_encode(array("username" => $username, "category" => $category, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>)'>+</button><br>
 
         <footer>
             <p style="pointer-events: none;" id="OrAccount"> about </p>
@@ -107,7 +117,7 @@
         
         CreateThemeSwitcher();
         
-        const goBackData = <?php echo json_encode(array("user" => $username, "token" => "zi3di(ufe31ck433Klls"), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+        const goBackData = <?php echo json_encode(array("user" => $username, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
         CreateGoBack("../index.php", goBackData);
     </script>
 </body>

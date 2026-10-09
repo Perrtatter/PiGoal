@@ -61,7 +61,7 @@
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
 
-        $query = "SELECT c.nom, c.is_complete, COUNT(CASE WHEN g.is_complete = true THEN 1 END) AS nbr_g_complete, count(g.id) as nbr_g FROM public.categorie c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN public.goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete order by nbr_g_complete desc;";
+        $query = "SELECT c.nom, c.is_complete, COUNT(CASE WHEN g.id <> 0 AND g.type <> 0 AND g.is_complete = true THEN 1 END) AS nbr_g_complete, COUNT(g.id) FILTER (WHERE g.id <> 0 AND g.type <> 0) AS nbr_g FROM public.categorie c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN public.goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete order by nbr_g_complete desc;";
         $result = pg_query_params($dbconn, $query, [$username]);
 
         if ($result === false) {
@@ -79,26 +79,22 @@
             
             // 5. Loop through and print each category name
             while ($row = pg_fetch_assoc($result)) { 
-                // gen data 
-                $data = json_encode(array(
-                    "username"=>$username,
-                    "category"=>$row["nom"]
+                $category_payload = htmlspecialchars(json_encode([
+                    "username" => $username,
+                    "category" => $row["nom"],
+                    "token" => "zi3di(ufe31ck433Klls"
+                ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
+                $delete_payload = htmlspecialchars(json_encode([
+                    "user" => $username,
+                    "category" => $row["nom"],
+                    "token" => "zi3di(ufe31ck433Klls"
+                ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
+                $category_class = $row['is_complete'] === "t" ? "complete" : "";
+                $category_name = htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8');
 
-                ));
-
-                // fetch number complete per category
-                $nbr_complete = 1;
-
-
-                if ($row['is_complete'] == "t"){
-                    // echo "<li class='complete' onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
-                    echo "<li class='complete' onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . " <span style='font-weight: bold;'>". $row['nbr_g_complete'] ."/" . $row['nbr_g'] . "</span></li>";
-                }
-
-                else{
-                    // echo "<li onclick='go2category(" . '"' . $row['nom'] . '"' . "," . '"' . $username . '"' . ")'>" . htmlspecialchars($row['nom']) . "<button class='del_cal_btn' onclick='del_category()'>🗑️</button></li>";
-                    echo "<li onclick='send_post(" . '"' . "goals/index.php" . '",'. $data . ")'>" . htmlspecialchars($row['nom']) . " <span style='font-weight: bold;'>". $row['nbr_g_complete'] ."/" . $row['nbr_g'] . "</span></li>";
-                }
+                echo '<li class="' . $category_class . '" onclick=\'send_post("goals/index.php", ' . $category_payload . ')\'>';
+                echo $category_name . " <span style='font-weight: bold;'>" . (int)$row['nbr_g_complete'] . "/" . (int)$row['nbr_g'] . "</span>";
+                echo '<button class="del_cal_btn" type="button" title="Supprimer la catégorie" aria-label="Supprimer la catégorie" onclick=\'event.stopPropagation(); if (confirm("Supprimer cette catégorie ?")) send_post("delete_category.php", ' . $delete_payload . ')\'>🗑️</button></li>';
 
             }
             

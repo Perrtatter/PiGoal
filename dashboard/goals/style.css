@@ -14,6 +14,8 @@ li{
 
 .background{
 background-color: red;
+position: relative;
+box-sizing: border-box;
 border-radius: 96px;
 top: clamp(-15px, -1.5vw, -15px);
 left: clamp(10px, 1.5vw, 20px);
@@ -21,6 +23,19 @@ right: clamp(-15px, -1.5vw, -10px);
 bottom: clamp(-15px, -1.5vw, -10px);
 width: clamp(91px, 62.6vw, 478px);
 height: 74px;
+}
+
+.goal-delete{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .complete{
