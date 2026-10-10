@@ -54,12 +54,12 @@
                 AND c.user_id = (SELECT id FROM public.\"user\" WHERE username = $2)
                 AND g.id <> 0
                 AND g.type <> 0
-            ORDER BY g.type ASC";
+            ORDER BY g.type,g.nom ASC";
 
         $result = pg_query_params($dbconn, $query, array($category, $username));
 
         if (pg_num_rows($result) === 0) {
-            echo "<p>No categories found for $category</p>";
+            echo "<p>No goals found for $category</p>";
         } 
         else {
             $goal_data_dict = [
