@@ -301,11 +301,11 @@ li button{
     box-shadow: 0 0 15px rgba(0, 220, 255, 0.4);
 }
 
-.complete{
+.complete, .shared.complete{
     background-color: rgb(0, 108, 0);
 }
 
-.complete:hover{
+.complete:hover, .shared.complete:hover{
     background-color: rgb(5, 172, 5);
 }
 
@@ -386,7 +386,8 @@ footer {
     background: rgb(27, 15, 1);
     padding: 10px 0;
     z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    margin-top:100px;
 }
 
 #pointImage{
@@ -447,4 +448,13 @@ body footer a{
   font-size: 15px;
   cursor:pointer;
   text-decoration: underline;
+}
+
+
+li.shared{
+  background-color: rgb(3, 98, 162);
+}
+
+li.shared:hover{
+  background-color: rgb(2, 152, 252);
 }

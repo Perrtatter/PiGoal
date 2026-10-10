@@ -21,7 +21,7 @@ connect = psycopg2.connect(dbname=dbname,host=host,port=port,user=username,passw
 cursor = connect.cursor()
 
 # clean data
-cursor.execute('update goal set is_complete=false;update "user" set nbr_point=0;update category set is_complete=false;')
+cursor.execute('update goal set is_complete=false;update "user" set nbr_point=0;update categorie set is_complete=false;')
 connect.commit()
 
 # close

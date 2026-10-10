@@ -88,7 +88,7 @@
                     "goal_id" => (int)$row["id"],
                     "token" => $token,
                 ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
-                $delete_button = '<button class="del_cal_btn goal-delete" type="button" title="Supprimer cet objectif" aria-label="Supprimer cet objectif" onclick=\'event.stopPropagation(); if (confirm("Supprimer cet objectif ?")) send_post("delete_goal.php", ' . $delete_data_json . ')\'>🗑️</button>';
+                $delete_button = '<button class="del_cal_btn goal-delete" type="button" title="Supprimer cet objectif" aria-label="Supprimer cet objectif" onclick=\'event.stopPropagation(); if (confirm("Delete this goal ?")) send_post("delete_goal.php", ' . $delete_data_json . ')\'>🗑️</button>';
                 $goal_name = htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8');
                 $goal_image = $goal_data_dict[(int)$row['type']];
 
@@ -106,10 +106,24 @@
 
     <button class="glow_button" onclick='send_post("create/index.php", <?php echo json_encode(array("username" => $username, "category" => $category, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>)'>+</button><br>
 
-        <footer>
-            <p style="pointer-events: none;" id="OrAccount"> about </p>
-            <a href="https://github.com/Perrtatter/PiGoal">Github</a>
-        </footer>
+    <p id="OrAccount"> or </p>
+    <?php
+        // gwn data
+        $data = json_encode([
+            "category" =>$category,
+            "username" =>$username,
+            "token" =>$token
+        ]);
+
+        echo "<button class='button' onclick='send_post(" . '"send/index.php"' . "," . $data . ")'>Send</button>";
+    ?>
+
+    <br><br><br><br>
+
+    <footer>
+        <p style="pointer-events: none;" id="OrAccount"> about </p>
+        <a href="https://github.com/Perrtatter/PiGoal">Github</a>
+    </footer>
     </div>
     <script type="module">
         import { CreateThemeSwitcher } from "../../compenents/theme_switcher/create_theme_switcher.js";
