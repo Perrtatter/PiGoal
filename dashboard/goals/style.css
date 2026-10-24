@@ -553,3 +553,138 @@ footer {
     left: 14px;
   }
 }
+
+.category-goal-actions {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  width: min(66vw, 500px);
+  margin: 24px auto;
+}
+
+.category-goal-actions .add-goal-button,
+.send-category-button {
+  box-sizing: border-box;
+  flex: 1 1 0;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  min-height: 54px;
+  margin: 0;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.category-goal-actions .add-goal-button {
+  font-size: 24px;
+}
+
+.send-category-button {
+  border: 1px solid rgba(115, 240, 230, 0.55);
+  color: #d9fffb;
+  background: linear-gradient(135deg, rgba(15, 92, 101, 0.88), rgba(14, 62, 83, 0.94));
+  box-shadow: 0 0 18px rgba(0, 211, 239, 0.15), inset 0 0 14px rgba(72, 238, 220, 0.08);
+}
+
+.send-category-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(19, 126, 132, 0.95), rgba(19, 85, 108, 0.98));
+  box-shadow: 0 0 24px rgba(0, 211, 239, 0.3);
+}
+
+.send-category-button:focus-visible,
+.add-goal-button:focus-visible {
+  outline: 2px solid #9df8f2;
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .category-goal-actions {
+    width: calc(100vw - 56px);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .goal-list {
+    width: calc(100vw - 36px);
+  }
+
+  .goal-list > li {
+    width: 100%;
+    margin: 14px 0;
+  }
+
+  .background {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 6px 8px;
+    width: 100%;
+    min-height: 76px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .background.type1::before,
+  .background.type2::before,
+  .background.type3::before,
+  .background.type4::before,
+  .background.complete::before {
+    display: block;
+    content: "";
+    position: absolute;
+    inset: -8px -12px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .background.type1::before {
+    background-image: url("/assets/hoverlays/mobile/diamond_mobile.png");
+  }
+
+  .background.type2::before {
+    background-image: url("/assets/hoverlays/mobile/gold_mobile.png");
+  }
+
+  .background.type3::before {
+    background-image: url("/assets/hoverlays/mobile/iron_mobile.png");
+  }
+
+  .background.type4::before {
+    background-image: url("/assets/hoverlays/mobile/cooper_mobile.png");
+  }
+
+  .background.complete::before {
+    background-image: url("/assets/hoverlays/mobile/complete_mobile.png") !important;
+  }
+
+  .background > img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .background > p {
+    font-size: 16px;
+  }
+
+  .goal-actions {
+    gap: 5px;
+  }
+
+  .goal-action,
+  .goal-delete {
+    width: 36px;
+    height: 36px;
+  }
+}

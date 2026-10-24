@@ -529,6 +529,95 @@ li button{
   box-sizing: border-box;      
 }
 
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 68px;
+  padding: 10px 20px;
+}
+
+.app-user-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.app-nav-button {
+  min-height: 42px;
+  padding: 0 17px;
+  border: 1px solid rgba(179, 222, 230, 0.18);
+  border-radius: 10px;
+  color: #d4e5ea;
+  background: rgba(20, 35, 49, 0.82);
+  box-shadow: inset 0 0 16px rgba(78, 169, 188, 0.035);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 160ms ease, color 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.app-nav-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(105, 230, 225, 0.5);
+  color: #f1fffe;
+  background: rgba(19, 75, 83, 0.9);
+  box-shadow: 0 0 18px rgba(28, 204, 214, 0.14);
+}
+
+.app-nav-button.is-active {
+  border-color: rgba(117, 240, 223, 0.66);
+  color: #08262b;
+  background: linear-gradient(135deg, #91f2dc, #42cde1);
+  box-shadow: 0 0 20px rgba(42, 218, 217, 0.25);
+}
+
+.app-nav-button:focus-visible {
+  outline: 2px solid #a1fff0;
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .app-header {
+    gap: 7px;
+    min-height: 58px;
+    padding: 8px 10px;
+  }
+
+  .app-header #go_back_div,
+  .app-header #theme_switcher_div {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .app-header #go_back,
+  .app-header #theme_switcher,
+  .app-header #go_back img,
+  .app-header #theme_switcher img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .app-user-navigation {
+    flex: 1 1 auto;
+    gap: 6px;
+  }
+
+  .app-nav-button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 40px;
+    padding: 0 8px;
+    font-size: 0.78rem;
+  }
+}
+
 .flex-container-invisible {
   display: contents; 
 }
@@ -638,16 +727,6 @@ body footer{
 body footer a{
    color: #eef0f3; 
 }
-
-#leaderboard_a{
-  color:white;
-  border:none;
-  background-color: rgba(31, 41, 55, 1.0);
-  font-size: 15px;
-  cursor:pointer;
-  text-decoration: underline;
-}
-
 
 li.shared{
   background-color: rgb(3, 98, 162);

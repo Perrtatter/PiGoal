@@ -20,12 +20,7 @@
 </head>
 <body>
     <div align="center">
-        <div class="header">
-            <div class="flex-container-invisible">
-                <div id="go_back_div"></div>
-                <div id="theme_switcher_div"></div>
-            </div>
-        </div>
+        <?php require __DIR__ . '/../compenents/user_navigation.php'; ?>
         <div id="logo_bg" style="">
             <img src="/assets/logo.png" id="logo">
         <div id="logo_glow"></div>
@@ -53,13 +48,15 @@
 
         else{
             $username = $_POST["user"];
-            echo "<h1 style='margin-top:10px; font-size:40px; background: linear-gradient(182deg, #ffffff, #b4b4b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;' id='hello_h1'>Hello <span style='background: linear-gradient(179deg, #6fe9d0, #129dd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>$username</span></h1>";
         }
 
         // fetch all category for user 
         // connect
         $connection_string = "host=$db_host port=$db_port dbname=$db_name user=$db_username password=$db_password";
         $dbconn = pg_connect($connection_string);
+
+        $safe_username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
+        echo '<h1 style="margin-top:10px; font-size:40px; background: linear-gradient(182deg, #ffffff, #b4b4b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;" id="hello_h1">Hello <span style="background: linear-gradient(179deg, #6fe9d0, #129dd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">' . $safe_username . '</span></h1>';
 
         $query = "SELECT c.nom, c.is_complete , c.is_shared, COUNT(CASE WHEN g.id <> 0 AND g.type <> 0 AND g.is_complete = true THEN 1 END) AS nbr_g_complete, COUNT(g.id) FILTER (WHERE g.id <> 0 AND g.type <> 0) AS nbr_g FROM public.categorie c INNER JOIN \"user\" u ON u.id = c.user_id INNER JOIN public.goal g ON g.id = c.goal_id WHERE u.username = $1 GROUP BY c.nom, c.is_complete, c.is_shared order by nbr_g_complete desc;";
         $result = pg_query_params($dbconn, $query, [$username]);
@@ -171,17 +168,6 @@
         pg_free_result($result);
     ?>
         <footer>
-            <!-- leaderboard link -->
-            <?php
-                // gen data
-                $data = json_encode(array(
-                    "token"=>"zi3di(ufe31ck433Klls",
-                    "user"=>$username
-                ));
-
-                echo "<button id='leaderboard_a' onclick='send_post(" . '"../leaderboard/index.php",' . $data . ")'>Leaderboard</button>";
-            ?>
-
             <p style="pointer-events: none;" id="OrAccount"> about </p>
             <a href="https://github.com/Perrtatter/PiGoal">Github</a>
         </footer>

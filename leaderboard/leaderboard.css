@@ -1,0 +1,454 @@
+.leaderboard-page {
+  min-height: 100vh;
+  padding-bottom: 96px;
+}
+
+.leaderboard-page .header {
+  position: sticky;
+  top: 0;
+  z-index: 110;
+  height: auto;
+  min-height: 62px;
+  padding: 12px 20px;
+}
+
+.leaderboard-shell {
+  width: min(1040px, calc(100% - 40px));
+  margin: 28px auto 42px;
+  text-align: left;
+}
+
+.leaderboard-heading {
+  position: relative;
+  padding: 8px 0 20px;
+}
+
+.leaderboard-eyebrow {
+  color: #77e8dc;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.leaderboard-heading h1 {
+  margin: 7px 0 4px;
+  color: #f2fbff;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.leaderboard-heading p {
+  margin: 0;
+  color: #b5cbd4;
+}
+
+.leaderboard-you {
+  position: absolute;
+  right: 0;
+  bottom: 22px;
+  padding: 9px 14px;
+  border: 1px solid rgba(107, 235, 222, 0.36);
+  border-radius: 999px;
+  color: #b5d7de;
+  background: rgba(12, 61, 71, 0.7);
+}
+
+.leaderboard-you strong {
+  margin-left: 6px;
+  color: #8df6e2;
+}
+
+.leaderboard-podium {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: 16px;
+  min-height: 330px;
+  padding: 28px 26px 0;
+  overflow: hidden;
+  border: 1px solid rgba(119, 226, 228, 0.21);
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(29, 223, 212, 0.15), transparent 45%),
+    linear-gradient(150deg, rgba(13, 31, 44, 0.92), rgba(23, 57, 63, 0.88));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28), 0 0 26px rgba(15, 199, 218, 0.09);
+}
+
+.podium-entry {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.podium-avatar-wrap {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  margin-bottom: 12px;
+  border: 2px solid rgba(210, 232, 238, 0.48);
+  border-radius: 50%;
+  background: rgba(11, 29, 38, 0.9);
+  box-shadow: 0 0 24px rgba(156, 225, 232, 0.16);
+}
+
+.podium-avatar-wrap img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  image-rendering: pixelated;
+  object-fit: cover;
+}
+
+.podium-place-1 .podium-avatar-wrap {
+  width: 100px;
+  height: 100px;
+  border-color: #f4d678;
+  box-shadow: 0 0 30px rgba(248, 199, 75, 0.34);
+}
+
+.podium-place-1 .podium-avatar-wrap img {
+  width: 78px;
+  height: 78px;
+}
+
+.podium-place-2 .podium-avatar-wrap {
+  border-color: #b9e7ee;
+}
+
+.podium-place-3 .podium-avatar-wrap {
+  border-color: #e8a77e;
+}
+
+.podium-place-label {
+  color: #f2d275;
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.podium-place-2 .podium-place-label { color: #cbe4e9; }
+.podium-place-3 .podium-place-label { color: #e8ab85; }
+
+.podium-name {
+  max-width: 100%;
+  margin-top: 5px;
+  color: #f0f8fb;
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.podium-points {
+  margin: 4px 0 14px;
+  color: #a9d9dc;
+  font-size: 0.85rem;
+}
+
+.podium-base {
+  display: block;
+  width: 100%;
+  height: 82px;
+  border: 1px solid rgba(201, 237, 239, 0.22);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background: linear-gradient(180deg, rgba(115, 165, 174, 0.23), rgba(40, 76, 85, 0.48));
+}
+
+.podium-place-1 .podium-base {
+  height: 126px;
+  border-color: rgba(244, 208, 111, 0.42);
+  background: linear-gradient(180deg, rgba(195, 153, 59, 0.34), rgba(76, 66, 43, 0.48));
+}
+
+.podium-place-3 .podium-base {
+  height: 62px;
+  border-color: rgba(222, 154, 114, 0.34);
+  background: linear-gradient(180deg, rgba(165, 99, 68, 0.26), rgba(70, 53, 48, 0.48));
+}
+
+.podium-entry.is-current-user .podium-name::after {
+  content: " · TOI";
+  color: #85f1dc;
+  font-size: 0.65rem;
+}
+
+.ranking-section {
+  margin-top: 30px;
+}
+
+.ranking-section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.ranking-section-heading h2 {
+  margin: 0;
+  color: #eff9fc;
+  font-size: 1.35rem;
+}
+
+.ranking-section-heading span {
+  color: #91aeb8;
+  font-size: 0.85rem;
+}
+
+.ranking-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ranking-row {
+  display: grid;
+  grid-template-columns: 38px 48px minmax(0, 1fr) minmax(100px, 160px);
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 12px 16px;
+  border: 1px solid rgba(196, 226, 235, 0.14);
+  border-radius: 10px;
+  background: linear-gradient(105deg, rgba(18, 35, 48, 0.92), rgba(31, 52, 61, 0.86));
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.16);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.ranking-list > .ranking-row {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.ranking-row:hover {
+  transform: translateY(-1px);
+  border-color: rgba(110, 225, 222, 0.38);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2), 0 0 16px rgba(27, 204, 211, 0.08);
+}
+
+.ranking-row.is-current-user {
+  border-color: rgba(103, 236, 218, 0.55);
+  background: linear-gradient(105deg, rgba(20, 86, 85, 0.58), rgba(20, 54, 65, 0.92));
+  box-shadow: 0 0 18px rgba(27, 210, 203, 0.12);
+}
+
+.ranking-number {
+  color: #a4bbc5;
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.ranking-row:nth-child(1) .ranking-number { color: #f0cf70; }
+.ranking-row:nth-child(2) .ranking-number { color: #d0e4e8; }
+.ranking-row:nth-child(3) .ranking-number { color: #e8aa82; }
+
+.ranking-avatar {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(158, 228, 229, 0.28);
+  border-radius: 50%;
+  background: rgba(9, 25, 35, 0.9);
+  image-rendering: pixelated;
+  object-fit: cover;
+}
+
+.ranking-player {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ranking-player strong {
+  color: #ecf7fa;
+  overflow-wrap: anywhere;
+}
+
+.ranking-player > span {
+  color: #9bb4bd;
+  font-size: 0.78rem;
+}
+
+.you-label {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 2px 6px;
+  border: 1px solid rgba(115, 238, 220, 0.35);
+  border-radius: 999px;
+  color: #a5fff0;
+  font-size: 0.57rem;
+  vertical-align: middle;
+}
+
+.ranking-score {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: end;
+  align-items: baseline;
+  gap: 0 5px;
+  text-align: right;
+}
+
+.ranking-score strong {
+  color: #8af0e3;
+  font-size: 1.08rem;
+}
+
+.ranking-score > span:not(.ranking-score-track) {
+  color: #89a7b1;
+  font-size: 0.72rem;
+}
+
+.ranking-score-track {
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(213, 236, 239, 0.12);
+}
+
+.ranking-score-track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #46cfdd, #8cf0d9);
+  box-shadow: 0 0 10px rgba(76, 232, 222, 0.42);
+}
+
+.leaderboard-empty {
+  padding: 38px 20px;
+  border: 1px solid rgba(196, 226, 235, 0.14);
+  border-radius: 12px;
+  color: #b4cbd2;
+  background: rgba(16, 33, 45, 0.8);
+  text-align: center;
+}
+
+.leaderboard-footer {
+  position: static;
+  margin-top: 28px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .leaderboard-page .header.app-header {
+    padding: 8px 10px;
+  }
+
+  .leaderboard-shell {
+    width: calc(100% - 28px);
+    margin-top: 16px;
+  }
+
+  .leaderboard-you {
+    position: static;
+    display: inline-block;
+    margin-top: 12px;
+  }
+
+  .leaderboard-podium {
+    min-height: 260px;
+    gap: 6px;
+    padding: 20px 10px 0;
+  }
+
+  .podium-avatar-wrap {
+    width: 58px;
+    height: 58px;
+  }
+
+  .podium-avatar-wrap img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .podium-place-1 .podium-avatar-wrap {
+    width: 76px;
+    height: 76px;
+  }
+
+  .podium-place-1 .podium-avatar-wrap img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .podium-name {
+    font-size: 0.82rem;
+  }
+
+  .podium-points {
+    font-size: 0.72rem;
+  }
+
+  .podium-base {
+    height: 62px;
+  }
+
+  .podium-place-1 .podium-base {
+    height: 92px;
+  }
+
+  .podium-place-3 .podium-base {
+    height: 48px;
+  }
+
+  .ranking-row {
+    grid-template-columns: 28px 40px minmax(0, 1fr) auto;
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .ranking-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .ranking-player strong {
+    font-size: 0.9rem;
+  }
+
+  .ranking-player > span {
+    font-size: 0.7rem;
+  }
+
+  .ranking-score {
+    min-width: 70px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ranking-row {
+    grid-template-columns: 24px 34px minmax(0, 1fr) 64px;
+    gap: 7px;
+    padding: 9px 7px;
+  }
+
+  .ranking-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ranking-player strong {
+    font-size: 0.82rem;
+  }
+
+  .ranking-player > span {
+    font-size: 0.65rem;
+  }
+
+  .ranking-score strong {
+    font-size: 0.95rem;
+  }
+}

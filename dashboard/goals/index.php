@@ -112,7 +112,10 @@
         }
     ?>
 
-    <button class="glow_button" onclick='send_post("create/index.php", <?php echo json_encode(array("username" => $username, "category" => $category, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>)'>+</button><br>
+    <div class="category-goal-actions">
+        <button class="glow_button add-goal-button" type="button" aria-label="Ajouter un objectif" onclick='send_post("create/index.php", <?php echo json_encode(array("username" => $username, "category" => $category, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>)'>+</button>
+        <button class="send-category-button" type="button" onclick='send_post("send/index.php", <?php echo json_encode(array("username" => $username, "category" => $category, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>)'>Send</button>
+    </div>
 
     <dialog class="goal-dialog" id="edit-goal-dialog">
         <form method="post" action="edit_goal.php">
