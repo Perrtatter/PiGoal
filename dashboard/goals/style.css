@@ -107,3 +107,449 @@ li img{
 .background.complete::after{
     box-shadow: 0 0 100px 30px rgba(45, 180, 0, 0.66);
 }
+
+/* Keep the decorative tier art behind the goal content. */
+.background.type1::before,
+.background.type2::before,
+.background.type3::before,
+.background.type4::before,
+.background.complete::before,
+.background.type1::after,
+.background.type2::after,
+.background.type3::after,
+.background.type4::after {
+  z-index: 0;
+}
+
+.background {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 6px 10px;
+  box-sizing: border-box;
+  isolation: isolate;
+  top: 0;
+  left: 0;
+  right: auto;
+  bottom: auto;
+  width: min(66vw, 500px);
+  min-width: 0;
+  min-height: 82px;
+  height: auto;
+  padding: 12px 16px;
+  border: 1px solid rgba(220, 255, 255, 0.16);
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.background > img,
+.background > p,
+.background > input,
+.background > .goal-actions {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.background > img {
+  float: none;
+  margin-left: 0;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.background > p {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  color: #f3fbf9;
+  font-size: clamp(15px, 2.2vw, 19px);
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+}
+
+.background > input[type="range"] {
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  min-width: 0;
+  margin: 3px 0 0;
+  accent-color: #56e6df;
+}
+
+.background:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 11px 28px rgba(0, 0, 0, 0.3);
+}
+
+.goal-actions {
+  position: relative;
+  top: auto;
+  right: auto;
+  z-index: 3;
+  display: flex;
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  align-items: center;
+  gap: 7px;
+  transform: none;
+}
+
+.goal-action,
+.goal-delete {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 11px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.goal-action:hover,
+.goal-delete:hover {
+  transform: translateY(-2px);
+}
+
+.goal-edit {
+  background: rgba(0, 195, 205, 0.34);
+  box-shadow: inset 0 0 12px rgba(0, 222, 223, 0.08);
+}
+
+.goal-edit:hover {
+  background: rgba(0, 211, 218, 0.52);
+  box-shadow: 0 0 16px rgba(0, 222, 223, 0.28);
+}
+
+.goal-delete {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+  background: rgba(238, 76, 93, 0.35);
+  box-shadow: inset 0 0 12px rgba(255, 94, 112, 0.08);
+}
+
+.goal-delete:hover {
+  background: rgba(245, 70, 91, 0.58);
+  box-shadow: 0 0 16px rgba(255, 83, 103, 0.3);
+}
+
+@media (max-width: 520px) {
+  .goal-list {
+    width: calc(100vw - 36px);
+  }
+
+  .goal-list > li {
+    margin: 14px 0;
+  }
+
+  .background {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 6px 8px;
+    width: 100%;
+    min-height: 76px;
+    padding: 10px;
+  }
+
+  .background > img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .goal-actions {
+    gap: 5px;
+  }
+
+  .goal-action,
+  .goal-delete {
+    width: 34px;
+    height: 36px;
+  }
+}
+
+body {
+  min-height: 100vh;
+  padding-bottom: 24px;
+}
+
+footer {
+  position: static;
+  margin-top: 28px;
+}
+
+.header #go_back_div {
+  position: fixed;
+  top: 16px;
+  left: 20px;
+  z-index: 110;
+}
+
+.goal-list {
+  width: min(66vw, 500px);
+  padding: 0;
+  margin: 0 auto;
+}
+
+.goal-list > li {
+  width: 100%;
+  margin: 16px 0;
+  padding: 0;
+}
+
+.background {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 6px 10px;
+  box-sizing: border-box;
+  isolation: isolate;
+  top: 0;
+  left: 0;
+  right: auto;
+  bottom: auto;
+  width: min(66vw, 500px);
+  min-width: 0;
+  min-height: 82px;
+  height: auto;
+  padding: 12px 16px;
+  border: 1px solid rgba(220, 255, 255, 0.16);
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.background:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 11px 28px rgba(0, 0, 0, 0.3);
+}
+
+.background > img {
+  float: none;
+  margin-left: 0;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.background > p {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  margin: 0;
+  color: #f3fbf9;
+  font-size: clamp(15px, 2.2vw, 19px);
+  line-height: 1.25;
+  text-align: left;
+  overflow-wrap: anywhere;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+}
+
+.background > input[type="range"] {
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  min-width: 0;
+  margin: 4px 0 0;
+  accent-color: #56e6df;
+}
+
+.goal-actions {
+  position: relative;
+  top: auto;
+  right: auto;
+  z-index: 3;
+  display: flex;
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  align-items: center;
+  gap: 7px;
+  transform: none;
+}
+
+.goal-action,
+.goal-delete {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 11px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.goal-action:hover,
+.goal-delete:hover {
+  transform: translateY(-2px);
+}
+
+.goal-edit {
+  background: rgba(0, 195, 205, 0.23);
+  box-shadow: inset 0 0 12px rgba(0, 222, 223, 0.08);
+}
+
+.goal-edit:hover {
+  background: rgba(0, 211, 218, 0.42);
+  box-shadow: 0 0 16px rgba(0, 222, 223, 0.28);
+}
+
+.goal-delete {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+  border-radius: 11px;
+  background: rgba(238, 76, 93, 0.22);
+  box-shadow: inset 0 0 12px rgba(255, 94, 112, 0.08);
+}
+
+.goal-delete:hover {
+  background: rgba(245, 70, 91, 0.5);
+  box-shadow: 0 0 16px rgba(255, 83, 103, 0.3);
+}
+
+.goal-action:focus-visible,
+.goal-delete:focus-visible,
+.goal-dialog-actions button:focus-visible {
+  outline: 2px solid #9df8f2;
+  outline-offset: 3px;
+}
+
+.goal-dialog {
+  width: min(420px, calc(100vw - 36px));
+  box-sizing: border-box;
+  padding: 24px;
+  border: 1px solid rgba(141, 242, 244, 0.35);
+  border-radius: 16px;
+  color: white;
+  background: linear-gradient(145deg, rgba(18, 35, 46, 0.98), rgba(29, 51, 60, 0.98));
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.55), 0 0 30px rgba(0, 218, 235, 0.17);
+}
+
+.goal-dialog::backdrop {
+  background: rgba(5, 12, 18, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.goal-dialog h2 {
+  margin: 0 0 20px;
+  font-size: 1.25rem;
+}
+
+.goal-dialog label:not(.goal-one-time-label) {
+  display: block;
+  margin: 14px 0 7px;
+  color: #c8e8e8;
+  text-align: left;
+}
+
+.goal-dialog .input {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+.goal-one-time-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.goal-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.goal-dialog-actions button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.goal-dialog-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.goal-dialog-cancel {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.goal-dialog-save {
+  color: #082126 !important;
+  background: linear-gradient(135deg, #70f0df, #39c9e7);
+  box-shadow: 0 0 16px rgba(57, 220, 225, 0.2);
+}
+
+@media (max-width: 520px) {
+  .goal-list {
+    width: calc(100vw - 56px);
+  }
+
+  .goal-list > li {
+    margin: 14px 0;
+  }
+
+  .background {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 6px 8px;
+    width: 100%;
+    min-height: 76px;
+    padding: 10px;
+  }
+
+  .background > img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .goal-actions {
+    gap: 5px;
+  }
+
+  .goal-action,
+  .goal-delete {
+    width: 36px;
+    height: 36px;
+  }
+
+  .goal-dialog {
+    padding: 20px;
+  }
+
+  .header #go_back_div {
+    top: 14px;
+    left: 14px;
+  }
+}

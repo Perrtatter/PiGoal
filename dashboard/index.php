@@ -75,7 +75,7 @@
         } 
         
         else {
-            echo "<ul>";
+            echo "<ul class='dashboard-categories'>";
             
             // 5. Loop through and print each category name
             while ($row = pg_fetch_assoc($result)) { 
@@ -84,17 +84,21 @@
                     "category" => $row["nom"],
                     "token" => "zi3di(ufe31ck433Klls"
                 ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
+                $category_class = $row['is_complete'] === "t" ? "complete" : "";
+                $category_name = htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8');
+
                 $delete_payload = htmlspecialchars(json_encode([
                     "user" => $username,
                     "category" => $row["nom"],
                     "token" => "zi3di(ufe31ck433Klls"
                 ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
-                $category_class = $row['is_complete'] === "t" ? "complete" : "";
-                $category_name = htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8');
 
-                echo '<li class="' . $category_class . '" onclick=\'send_post("goals/index.php", ' . $category_payload . ')\'>';
-                echo $category_name . " <span style='font-weight: bold;'>" . (int)$row['nbr_g_complete'] . "/" . (int)$row['nbr_g'] . "</span>";
-                echo '<button class="del_cal_btn" type="button" title="Supprimer la catégorie" aria-label="Supprimer la catégorie" onclick=\'event.stopPropagation(); if (confirm("Supprimer cette catégorie ?")) send_post("delete_category.php", ' . $delete_payload . ')\'>🗑️</button></li>';
+                echo '<li class="category-row ' . $category_class . '" onclick=\'send_post("goals/index.php", ' . $category_payload . ')\'>';
+                echo '<span class="category-summary"><span class="category-name">' . $category_name . '</span><span class="category-progress">' . (int)$row['nbr_g_complete'] . '/' . (int)$row['nbr_g'] . '</span></span>';
+                echo '<span class="category-actions">';
+                echo '<button class="category-action edit-category-button" type="button" title="Modifier la catégorie" aria-label="Modifier la catégorie" data-category="' . $category_name . '">✏️</button>';
+                echo '<button class="category-action del_cal_btn" type="button" title="Supprimer la catégorie" aria-label="Supprimer la catégorie" onclick=\'event.stopPropagation(); if (confirm("Supprimer cette catégorie ?")) send_post("delete_category.php", ' . $delete_payload . ')\'>🗑️</button>';
+                echo '</span></li>';
 
             }
             
@@ -116,6 +120,38 @@
 
         echo "<button class='glow_button' onclick='send_post(" . '"add_category/index.php",' . $data . ")'>+</button><br>";
     ?>
+
+    <dialog class="category-dialog" id="edit-category-dialog">
+        <form method="post" action="edit_category.php">
+            <h2>Modifier la catégorie</h2>
+            <input type="hidden" name="user" value="<?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?>">
+            <input type="hidden" name="category">
+            <input type="hidden" name="token" value="zi3di(ufe31ck433Klls">
+            <label for="new-category-name">Nom</label>
+            <input class="input" id="new-category-name" type="text" name="new_category" required maxlength="100" autocomplete="off">
+            <div class="dialog-actions">
+                <button class="dialog-cancel" type="button" onclick="document.getElementById('edit-category-dialog').close()">Annuler</button>
+                <button class="dialog-save" type="submit">Enregistrer</button>
+            </div>
+        </form>
+    </dialog>
+    <script>
+        const categoryDialog = document.getElementById('edit-category-dialog');
+        document.querySelectorAll('.edit-category-button').forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const nameInput = categoryDialog.querySelector('[name="new_category"]');
+                categoryDialog.querySelector('[name="category"]').value = button.dataset.category;
+                nameInput.value = button.dataset.category;
+                categoryDialog.showModal();
+                nameInput.focus();
+                nameInput.select();
+            });
+        });
+        categoryDialog.addEventListener('click', (event) => {
+            if (event.target === categoryDialog) categoryDialog.close();
+        });
+    </script>
 
     <?php
         // dispay coins

@@ -69,7 +69,7 @@
                 4=> "../../assets/copper.png"
             ];
 
-            echo "<ul style='margin-left:-3vw;'>";
+            echo "<ul class='goal-list'>";
             
             while ($row = pg_fetch_assoc($result)) {
                 $is_complete = $row['is_complete'] === "t";
@@ -88,15 +88,23 @@
                     "goal_id" => (int)$row["id"],
                     "token" => $token,
                 ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
+                $edit_data_json = htmlspecialchars(json_encode([
+                    "goalId" => (int)$row["id"],
+                    "name" => $row["nom"],
+                    "type" => (int)$row["type"],
+                    "oneTime" => $row['one_time'] === 't',
+                ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8');
+                $edit_button = '<button class="goal-action goal-edit" type="button" title="Modifier cet objectif" aria-label="Modifier cet objectif" data-goal="' . $edit_data_json . '">✏️</button>';
                 $delete_button = '<button class="del_cal_btn goal-delete" type="button" title="Supprimer cet objectif" aria-label="Supprimer cet objectif" onclick=\'event.stopPropagation(); if (confirm("Supprimer cet objectif ?")) send_post("delete_goal.php", ' . $delete_data_json . ')\'>🗑️</button>';
+                $goal_actions = '<span class="goal-actions">' . $edit_button . $delete_button . '</span>';
                 $goal_name = htmlspecialchars($row['nom'], ENT_QUOTES, 'UTF-8');
                 $goal_image = $goal_data_dict[(int)$row['type']];
 
                 if ($row['one_time'] === "t") {
                     $action = $is_complete ? 'goal_uncompleter.php' : 'goal_completer.php';
-                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "' onclick='send_post(\"$action\", $data_json)'><img src='$goal_image' width=50><p>$goal_name</p>$delete_button</div></li>";
+                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "' onclick='send_post(\"$action\", $data_json)'><img src='$goal_image' width=50><p>$goal_name</p>$goal_actions</div></li>";
                 } else {
-                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "'><img src='$goal_image' width=50><p>$goal_name</p><input type='range' min=0 max=3 step=1 value='" . (int)$row['step'] . "' data-goal='$data_json' onchange='updateGoalStep(this)'>$delete_button</div></li>";
+                    echo "<li><div class=\"$classes\" id='goal_li_" . (int)$row['id'] . "'><img src='$goal_image' width=50><p>$goal_name</p><input type='range' min=0 max=3 step=1 value='" . (int)$row['step'] . "' data-goal='$data_json' onchange='updateGoalStep(this)'>$goal_actions</div></li>";
                 }
 
             }
@@ -105,6 +113,51 @@
     ?>
 
     <button class="glow_button" onclick='send_post("create/index.php", <?php echo json_encode(array("username" => $username, "category" => $category, "token" => $token), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>)'>+</button><br>
+
+    <dialog class="goal-dialog" id="edit-goal-dialog">
+        <form method="post" action="edit_goal.php">
+            <h2>Modifier l’objectif</h2>
+            <input type="hidden" name="username" value="<?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?>">
+            <input type="hidden" name="category" value="<?php echo htmlspecialchars($category, ENT_QUOTES, 'UTF-8'); ?>">
+            <input type="hidden" name="goal_id">
+            <input type="hidden" name="token" value="<?php echo htmlspecialchars($token, ENT_QUOTES, 'UTF-8'); ?>">
+            <label for="edit-goal-name">Nom</label>
+            <input class="input" id="edit-goal-name" type="text" name="goal_name" required maxlength="150" autocomplete="off">
+            <label for="edit-goal-type">Type</label>
+            <select class="input" id="edit-goal-type" name="goal_type">
+                <option value="1">Diamant</option>
+                <option value="2">Or</option>
+                <option value="3">Argent</option>
+                <option value="4">Cuivre</option>
+            </select>
+            <label class="goal-one-time-label"><input type="checkbox" name="one_time"> Objectif ponctuel</label>
+            <div class="goal-dialog-actions">
+                <button class="goal-dialog-cancel" type="button" onclick="document.getElementById('edit-goal-dialog').close()">Annuler</button>
+                <button class="goal-dialog-save" type="submit">Enregistrer</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+        const goalDialog = document.getElementById('edit-goal-dialog');
+        document.querySelectorAll('.goal-edit').forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const goal = JSON.parse(button.dataset.goal);
+                goalDialog.querySelector('[name="goal_id"]').value = goal.goalId;
+                goalDialog.querySelector('[name="goal_name"]').value = goal.name;
+                goalDialog.querySelector('[name="goal_type"]').value = goal.type;
+                goalDialog.querySelector('[name="one_time"]').checked = goal.oneTime;
+                goalDialog.showModal();
+                const nameInput = goalDialog.querySelector('[name="goal_name"]');
+                nameInput.focus();
+                nameInput.select();
+            });
+        });
+        goalDialog.addEventListener('click', (event) => {
+            if (event.target === goalDialog) goalDialog.close();
+        });
+    </script>
 
         <footer>
             <p style="pointer-events: none;" id="OrAccount"> about </p>
