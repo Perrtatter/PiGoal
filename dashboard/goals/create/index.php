@@ -17,14 +17,15 @@
 
         CreateThemeSwitcher();
 
-        const username = <?php echo json_encode((string)($_POST['username'] ?? ''), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
-        const category = <?php echo json_encode((string)($_POST['category'] ?? ''), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+        const username = <?php echo json_encode((string)($_POST['username']), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+        const category = <?php echo json_encode((string)($_POST['category']), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
         const goBackData = {
-            user: username,
+            username: username,
             token: "zi3di(ufe31ck433Klls",
             category: category,
         };
 
+        console.log(username,category)
         CreateGoBack("../index.php", goBackData);
     </script>
 
@@ -138,10 +139,8 @@
                 <option value="4">Copper</option>
             </select><br><br>
 
-            <label style="display:flex; align-items:center; gap:10px; color:#fff;">
-                <input type="checkbox" name="one_time">
-                One-time goal
-            </label><br><br>
+            <input type="checkbox" name="one_time">One-time goal
+            <br><br>
 
             <button class="glow_button" type="submit">Add goal</button>
         </form>

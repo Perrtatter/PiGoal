@@ -38,8 +38,8 @@
         $db_username = get_env("../../","username");
         $db_name = get_env("../../","dbname");
 
-        $category = (string)($_POST["category"] ?? "");
-        $username = (string)($_POST["username"] ?? "");
+        $category = (string)($_POST["category"]);
+        $username = (string)($_POST["username"]);
         $token = (string)($_POST["token"] ?? "zi3di(ufe31ck433Klls");
         echo "<h1 id='hello_h1'>" . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</h1>";
 
@@ -54,12 +54,12 @@
                 AND c.user_id = (SELECT id FROM public.\"user\" WHERE username = $2)
                 AND g.id <> 0
                 AND g.type <> 0
-            ORDER BY g.type ASC";
+            ORDER BY g.type,g.nom ASC";
 
         $result = pg_query_params($dbconn, $query, array($category, $username));
 
         if (pg_num_rows($result) === 0) {
-            echo "<p>Cette catégorie est vide. Ajoute ton premier objectif !</p>";
+            echo "<p>No goals found for $category</p>";
         } 
         else {
             $goal_data_dict = [

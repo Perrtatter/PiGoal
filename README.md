@@ -1,4 +1,4 @@
-# Pigoal v2.beta.15
+# Pigoal v2.17
 <br>
  
 ## Requirements
@@ -38,27 +38,16 @@ HTTPS URL  : https://www.pigoal.ch
  - Uncomplete Goal
  - Complete category
  - Points per user
+ - Leaderboard 
+ - Steps
+ - Create category
+ - Create goals
+ - Share category
 
 <br>
  
 ## Update 
 Run this on your linux shell
 ```bash
-# go to apache
-cd /var/www/html
-
-# remove old files
-sudo rm -rf *
-
-# download news
-sudo git clone https://github.com/Perrtatter/PiGoal.git temp_dir
-
-# move it
-sudo mv temp_dir/* .
-
-# remove temps dir
-sudo rm -rf tmp_dir
-
-# update apache
-sudo systemctl reload apache2
+sudo pigoal_update
 ```
